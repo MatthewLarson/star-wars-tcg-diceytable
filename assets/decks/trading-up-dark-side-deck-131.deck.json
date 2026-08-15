@@ -1,0 +1,325 @@
+{
+  "schemaVersion": 1,
+  "id": "star-wars-tcg-deck-131",
+  "name": "Trading Up - Dark Side Deck",
+  "face": {
+    "texturePath": "assets/textures/deck-131-trading-up-dark-side-deck-face.webp",
+    "columns": 10,
+    "rows": 6,
+    "cardCount": 60,
+    "cardWidthPx": 400,
+    "cardHeightPx": 560
+  },
+  "uniqueBacks": false,
+  "back": {
+    "kind": "single",
+    "texturePath": "assets/textures/card-back.webp"
+  },
+  "sideways": false,
+  "backIsHidden": false,
+  "cardFields": [],
+  "deckFields": [],
+  "data": {},
+  "cards": [
+    {
+      "cardId": "c0",
+      "faceIndex": 0,
+      "count": 1
+    },
+    {
+      "cardId": "c1",
+      "faceIndex": 1,
+      "count": 1
+    },
+    {
+      "cardId": "c2",
+      "faceIndex": 2,
+      "count": 1
+    },
+    {
+      "cardId": "c3",
+      "faceIndex": 3,
+      "count": 1
+    },
+    {
+      "cardId": "c4",
+      "faceIndex": 4,
+      "count": 1
+    },
+    {
+      "cardId": "c5",
+      "faceIndex": 5,
+      "count": 1
+    },
+    {
+      "cardId": "c6",
+      "faceIndex": 6,
+      "count": 1
+    },
+    {
+      "cardId": "c7",
+      "faceIndex": 7,
+      "count": 1
+    },
+    {
+      "cardId": "c8",
+      "faceIndex": 8,
+      "count": 1
+    },
+    {
+      "cardId": "c9",
+      "faceIndex": 9,
+      "count": 1
+    },
+    {
+      "cardId": "c10",
+      "faceIndex": 10,
+      "count": 1
+    },
+    {
+      "cardId": "c11",
+      "faceIndex": 11,
+      "count": 1
+    },
+    {
+      "cardId": "c12",
+      "faceIndex": 12,
+      "count": 1
+    },
+    {
+      "cardId": "c13",
+      "faceIndex": 13,
+      "count": 1
+    },
+    {
+      "cardId": "c14",
+      "faceIndex": 14,
+      "count": 1
+    },
+    {
+      "cardId": "c15",
+      "faceIndex": 15,
+      "count": 1
+    },
+    {
+      "cardId": "c16",
+      "faceIndex": 16,
+      "count": 1
+    },
+    {
+      "cardId": "c17",
+      "faceIndex": 17,
+      "count": 1
+    },
+    {
+      "cardId": "c18",
+      "faceIndex": 18,
+      "count": 1
+    },
+    {
+      "cardId": "c19",
+      "faceIndex": 19,
+      "count": 1
+    },
+    {
+      "cardId": "c20",
+      "faceIndex": 20,
+      "count": 1
+    },
+    {
+      "cardId": "c21",
+      "faceIndex": 21,
+      "count": 1
+    },
+    {
+      "cardId": "c22",
+      "faceIndex": 22,
+      "count": 1
+    },
+    {
+      "cardId": "c23",
+      "faceIndex": 23,
+      "count": 1
+    },
+    {
+      "cardId": "c24",
+      "faceIndex": 24,
+      "count": 1
+    },
+    {
+      "cardId": "c25",
+      "faceIndex": 25,
+      "count": 1
+    },
+    {
+      "cardId": "c26",
+      "faceIndex": 26,
+      "count": 1
+    },
+    {
+      "cardId": "c27",
+      "faceIndex": 27,
+      "count": 1
+    },
+    {
+      "cardId": "c28",
+      "faceIndex": 28,
+      "count": 1
+    },
+    {
+      "cardId": "c29",
+      "faceIndex": 29,
+      "count": 1
+    },
+    {
+      "cardId": "c30",
+      "faceIndex": 30,
+      "count": 1
+    },
+    {
+      "cardId": "c31",
+      "faceIndex": 31,
+      "count": 1
+    },
+    {
+      "cardId": "c32",
+      "faceIndex": 32,
+      "count": 1
+    },
+    {
+      "cardId": "c33",
+      "faceIndex": 33,
+      "count": 1
+    },
+    {
+      "cardId": "c34",
+      "faceIndex": 34,
+      "count": 1
+    },
+    {
+      "cardId": "c35",
+      "faceIndex": 35,
+      "count": 1
+    },
+    {
+      "cardId": "c36",
+      "faceIndex": 36,
+      "count": 1
+    },
+    {
+      "cardId": "c37",
+      "faceIndex": 37,
+      "count": 1
+    },
+    {
+      "cardId": "c38",
+      "faceIndex": 38,
+      "count": 1
+    },
+    {
+      "cardId": "c39",
+      "faceIndex": 39,
+      "count": 1
+    },
+    {
+      "cardId": "c40",
+      "faceIndex": 40,
+      "count": 1
+    },
+    {
+      "cardId": "c41",
+      "faceIndex": 41,
+      "count": 1
+    },
+    {
+      "cardId": "c42",
+      "faceIndex": 42,
+      "count": 1
+    },
+    {
+      "cardId": "c43",
+      "faceIndex": 43,
+      "count": 1
+    },
+    {
+      "cardId": "c44",
+      "faceIndex": 44,
+      "count": 1
+    },
+    {
+      "cardId": "c45",
+      "faceIndex": 45,
+      "count": 1
+    },
+    {
+      "cardId": "c46",
+      "faceIndex": 46,
+      "count": 1
+    },
+    {
+      "cardId": "c47",
+      "faceIndex": 47,
+      "count": 1
+    },
+    {
+      "cardId": "c48",
+      "faceIndex": 48,
+      "count": 1
+    },
+    {
+      "cardId": "c49",
+      "faceIndex": 49,
+      "count": 1
+    },
+    {
+      "cardId": "c50",
+      "faceIndex": 50,
+      "count": 1
+    },
+    {
+      "cardId": "c51",
+      "faceIndex": 51,
+      "count": 1
+    },
+    {
+      "cardId": "c52",
+      "faceIndex": 52,
+      "count": 1
+    },
+    {
+      "cardId": "c53",
+      "faceIndex": 53,
+      "count": 1
+    },
+    {
+      "cardId": "c54",
+      "faceIndex": 54,
+      "count": 1
+    },
+    {
+      "cardId": "c55",
+      "faceIndex": 55,
+      "count": 1
+    },
+    {
+      "cardId": "c56",
+      "faceIndex": 56,
+      "count": 1
+    },
+    {
+      "cardId": "c57",
+      "faceIndex": 57,
+      "count": 1
+    },
+    {
+      "cardId": "c58",
+      "faceIndex": 58,
+      "count": 1
+    },
+    {
+      "cardId": "c59",
+      "faceIndex": 59,
+      "count": 1
+    }
+  ]
+}
