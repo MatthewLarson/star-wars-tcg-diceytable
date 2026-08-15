@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0",
+  "id": "star-wars-tcg",
+  "name": "Star Wars: Trading Card Game (WOTC)",
+  "version": "0.1.0",
+  "type": "game-pack",
+  "entry": {
+    "setup": "setup.json",
+    "script": "scripts/main.js"
+  },
+  "assets": [
+    "media/screenshot-0.webp",
+    "media/cover.webp",
+    "media/cover-thumb.webp"
+  ],
+  "compatibility": {
+    "engine": ">=0.1 <1.0"
+  },
+  "capabilities": {
+    "version": "1",
+    "allowed": [
+      "log"
+    ]
+  },
+  "license": "MIT",
+  "tags": [
+    "tcg",
+    "wotc",
+    "star-wars",
+    "wizards-of-the-coast",
+    "swtcg",
+    "trading-card-game"
+  ],
+  "summary": "A Star Wars TCG from Wizards of the Coast",
+  "description": "A Star Wars TCG from Wizards of the Coast",
+  "category": "ccg-lcg",
+  "players": {
+    "min": 2,
+    "max": 2
+  },
+  "coverImage": "media/cover.webp",
+  "screenshots": [
+    {
+      "path": "media/screenshot-0.webp",
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.5625
+      }
+    }
+  ]
+}
