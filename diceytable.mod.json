@@ -45,11 +45,11 @@
     "assets/textures/counter-subtype-misc.webp",
     "assets/textures/counter-temp.webp",
     "assets/textures/counter-trigger.webp",
-    "assets/textures/deck-129-all-the-duchess-s-men-light-side-deck-face.webp",
-    "assets/textures/deck-130-shadow-collective-dark-side-deck-face.webp",
-    "assets/textures/deck-131-trading-up-dark-side-deck-face.webp",
-    "assets/textures/deck-132-luke-s-rally-light-side-deck-face.webp",
-    "assets/textures/play-mat.webp"
+    "assets/textures/play-mat.webp",
+    "assets/textures/decks/all-the-duchess-s-men-light-side-deck-129/sheet-1.webp",
+    "assets/textures/decks/luke-s-rally-light-side-deck-132/sheet-1.webp",
+    "assets/textures/decks/shadow-collective-dark-side-deck-130/sheet-1.webp",
+    "assets/textures/decks/trading-up-dark-side-deck-131/sheet-1.webp"
   ],
   "compatibility": {
     "engine": ">=0.1 <1.0"

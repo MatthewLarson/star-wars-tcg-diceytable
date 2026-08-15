@@ -3,12 +3,12 @@
   "id": "star-wars-tcg-deck-130",
   "name": "Shadow Collective - Dark Side Deck",
   "face": {
-    "texturePath": "assets/textures/deck-130-shadow-collective-dark-side-deck-face.webp",
+    "texturePath": "assets/textures/decks/shadow-collective-dark-side-deck-130/sheet-1.webp",
     "columns": 10,
     "rows": 7,
-    "cardCount": 69,
-    "cardWidthPx": 400,
-    "cardHeightPx": 560
+    "cardCount": 68,
+    "cardWidthPx": 328,
+    "cardHeightPx": 460
   },
   "uniqueBacks": false,
   "back": {
@@ -22,349 +22,480 @@
   "data": {},
   "cards": [
     {
-      "cardId": "c0",
+      "cardId": "card-1",
+      "label": "Card 1",
       "faceIndex": 0,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/000-card-1.webp"
     },
     {
-      "cardId": "c1",
+      "cardId": "card-2",
+      "label": "Card 2",
       "faceIndex": 1,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/001-card-2.webp"
     },
     {
-      "cardId": "c2",
+      "cardId": "card-3",
+      "label": "Card 3",
       "faceIndex": 2,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/002-card-3.webp"
     },
     {
-      "cardId": "c3",
+      "cardId": "card-4",
+      "label": "Card 4",
       "faceIndex": 3,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/003-card-4.webp"
     },
     {
-      "cardId": "c4",
+      "cardId": "card-5",
+      "label": "Card 5",
       "faceIndex": 4,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/004-card-5.webp"
     },
     {
-      "cardId": "c5",
+      "cardId": "card-6",
+      "label": "Card 6",
       "faceIndex": 5,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/005-card-6.webp"
     },
     {
-      "cardId": "c6",
+      "cardId": "card-7",
+      "label": "Card 7",
       "faceIndex": 6,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/006-card-7.webp"
     },
     {
-      "cardId": "c7",
+      "cardId": "card-8",
+      "label": "Card 8",
       "faceIndex": 7,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/007-card-8.webp"
     },
     {
-      "cardId": "c8",
+      "cardId": "card-9",
+      "label": "Card 9",
       "faceIndex": 8,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/008-card-9.webp"
     },
     {
-      "cardId": "c9",
+      "cardId": "card-10",
+      "label": "Card 10",
       "faceIndex": 9,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/009-card-10.webp"
     },
     {
-      "cardId": "c10",
+      "cardId": "card-11",
+      "label": "Card 11",
       "faceIndex": 10,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/010-card-11.webp"
     },
     {
-      "cardId": "c11",
+      "cardId": "card-12",
+      "label": "Card 12",
       "faceIndex": 11,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/011-card-12.webp"
     },
     {
-      "cardId": "c12",
+      "cardId": "card-13",
+      "label": "Card 13",
       "faceIndex": 12,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/012-card-13.webp"
     },
     {
-      "cardId": "c13",
+      "cardId": "card-14",
+      "label": "Card 14",
       "faceIndex": 13,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/013-card-14.webp"
     },
     {
-      "cardId": "c14",
+      "cardId": "card-15",
+      "label": "Card 15",
       "faceIndex": 14,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/014-card-15.webp"
     },
     {
-      "cardId": "c15",
+      "cardId": "card-16",
+      "label": "Card 16",
       "faceIndex": 15,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/015-card-16.webp"
     },
     {
-      "cardId": "c16",
+      "cardId": "card-17",
+      "label": "Card 17",
       "faceIndex": 16,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/016-card-17.webp"
     },
     {
-      "cardId": "c17",
+      "cardId": "card-18",
+      "label": "Card 18",
       "faceIndex": 17,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/017-card-18.webp"
     },
     {
-      "cardId": "c18",
+      "cardId": "card-19",
+      "label": "Card 19",
       "faceIndex": 18,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/018-card-19.webp"
     },
     {
-      "cardId": "c19",
+      "cardId": "card-20",
+      "label": "Card 20",
       "faceIndex": 19,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/019-card-20.webp"
     },
     {
-      "cardId": "c20",
+      "cardId": "card-21",
+      "label": "Card 21",
       "faceIndex": 20,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/020-card-21.webp"
     },
     {
-      "cardId": "c21",
+      "cardId": "card-22",
+      "label": "Card 22",
       "faceIndex": 21,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/021-card-22.webp"
     },
     {
-      "cardId": "c22",
+      "cardId": "card-23",
+      "label": "Card 23",
       "faceIndex": 22,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/022-card-23.webp"
     },
     {
-      "cardId": "c23",
+      "cardId": "card-24",
+      "label": "Card 24",
       "faceIndex": 23,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/023-card-24.webp"
     },
     {
-      "cardId": "c24",
+      "cardId": "card-25",
+      "label": "Card 25",
       "faceIndex": 24,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/024-card-25.webp"
     },
     {
-      "cardId": "c25",
+      "cardId": "card-26",
+      "label": "Card 26",
       "faceIndex": 25,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/025-card-26.webp"
     },
     {
-      "cardId": "c26",
+      "cardId": "card-27",
+      "label": "Card 27",
       "faceIndex": 26,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/026-card-27.webp"
     },
     {
-      "cardId": "c27",
+      "cardId": "card-28",
+      "label": "Card 28",
       "faceIndex": 27,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/027-card-28.webp"
     },
     {
-      "cardId": "c28",
+      "cardId": "card-29",
+      "label": "Card 29",
       "faceIndex": 28,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/028-card-29.webp"
     },
     {
-      "cardId": "c29",
+      "cardId": "card-30",
+      "label": "Card 30",
       "faceIndex": 29,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/029-card-30.webp"
     },
     {
-      "cardId": "c30",
+      "cardId": "card-31",
+      "label": "Card 31",
       "faceIndex": 30,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/030-card-31.webp"
     },
     {
-      "cardId": "c31",
+      "cardId": "card-32",
+      "label": "Card 32",
       "faceIndex": 31,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/031-card-32.webp"
     },
     {
-      "cardId": "c32",
+      "cardId": "card-33",
+      "label": "Card 33",
       "faceIndex": 32,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/032-card-33.webp"
     },
     {
-      "cardId": "c33",
+      "cardId": "card-34",
+      "label": "Card 34",
       "faceIndex": 33,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/033-card-34.webp"
     },
     {
-      "cardId": "c34",
+      "cardId": "card-35",
+      "label": "Card 35",
       "faceIndex": 34,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/034-card-35.webp"
     },
     {
-      "cardId": "c35",
+      "cardId": "card-36",
+      "label": "Card 36",
       "faceIndex": 35,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/035-card-36.webp"
     },
     {
-      "cardId": "c36",
+      "cardId": "card-37",
+      "label": "Card 37",
       "faceIndex": 36,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/036-card-37.webp"
     },
     {
-      "cardId": "c37",
+      "cardId": "card-38",
+      "label": "Card 38",
       "faceIndex": 37,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/037-card-38.webp"
     },
     {
-      "cardId": "c38",
+      "cardId": "card-39",
+      "label": "Card 39",
       "faceIndex": 38,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/038-card-39.webp"
     },
     {
-      "cardId": "c39",
+      "cardId": "card-40",
+      "label": "Card 40",
       "faceIndex": 39,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/039-card-40.webp"
     },
     {
-      "cardId": "c40",
+      "cardId": "card-41",
+      "label": "Card 41",
       "faceIndex": 40,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/040-card-41.webp"
     },
     {
-      "cardId": "c41",
+      "cardId": "card-42",
+      "label": "Card 42",
       "faceIndex": 41,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/041-card-42.webp"
     },
     {
-      "cardId": "c42",
+      "cardId": "card-43",
+      "label": "Card 43",
       "faceIndex": 42,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/042-card-43.webp"
     },
     {
-      "cardId": "c43",
+      "cardId": "card-44",
+      "label": "Card 44",
       "faceIndex": 43,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/043-card-44.webp"
     },
     {
-      "cardId": "c44",
+      "cardId": "card-45",
+      "label": "Card 45",
       "faceIndex": 44,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/044-card-45.webp"
     },
     {
-      "cardId": "c45",
+      "cardId": "card-46",
+      "label": "Card 46",
       "faceIndex": 45,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/045-card-46.webp"
     },
     {
-      "cardId": "c46",
+      "cardId": "card-47",
+      "label": "Card 47",
       "faceIndex": 46,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/046-card-47.webp"
     },
     {
-      "cardId": "c47",
+      "cardId": "card-48",
+      "label": "Card 48",
       "faceIndex": 47,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/047-card-48.webp"
     },
     {
-      "cardId": "c48",
+      "cardId": "card-49",
+      "label": "Card 49",
       "faceIndex": 48,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/048-card-49.webp"
     },
     {
-      "cardId": "c49",
+      "cardId": "card-50",
+      "label": "Card 50",
       "faceIndex": 49,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/049-card-50.webp"
     },
     {
-      "cardId": "c50",
+      "cardId": "card-51",
+      "label": "Card 51",
       "faceIndex": 50,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/050-card-51.webp"
     },
     {
-      "cardId": "c51",
+      "cardId": "card-52",
+      "label": "Card 52",
       "faceIndex": 51,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/051-card-52.webp"
     },
     {
-      "cardId": "c52",
+      "cardId": "card-53",
+      "label": "Card 53",
       "faceIndex": 52,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/052-card-53.webp"
     },
     {
-      "cardId": "c53",
+      "cardId": "card-54",
+      "label": "Card 54",
       "faceIndex": 53,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/053-card-54.webp"
     },
     {
-      "cardId": "c54",
+      "cardId": "card-55",
+      "label": "Card 55",
       "faceIndex": 54,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/054-card-55.webp"
     },
     {
-      "cardId": "c55",
+      "cardId": "card-56",
+      "label": "Card 56",
       "faceIndex": 55,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/055-card-56.webp"
     },
     {
-      "cardId": "c56",
+      "cardId": "card-57",
+      "label": "Card 57",
       "faceIndex": 56,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/056-card-57.webp"
     },
     {
-      "cardId": "c57",
+      "cardId": "card-58",
+      "label": "Card 58",
       "faceIndex": 57,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/057-card-58.webp"
     },
     {
-      "cardId": "c58",
+      "cardId": "card-59",
+      "label": "Card 59",
       "faceIndex": 58,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/058-card-59.webp"
     },
     {
-      "cardId": "c59",
+      "cardId": "card-60",
+      "label": "Card 60",
       "faceIndex": 59,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/059-card-60.webp"
     },
     {
-      "cardId": "c60",
+      "cardId": "card-61",
+      "label": "Card 61",
       "faceIndex": 60,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/060-card-61.webp"
     },
     {
-      "cardId": "c61",
+      "cardId": "card-62",
+      "label": "Card 62",
       "faceIndex": 61,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/061-card-62.webp"
     },
     {
-      "cardId": "c62",
+      "cardId": "card-63",
+      "label": "Card 63",
       "faceIndex": 62,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/062-card-63.webp"
     },
     {
-      "cardId": "c63",
+      "cardId": "card-64",
+      "label": "Card 64",
       "faceIndex": 63,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/063-card-64.webp"
     },
     {
-      "cardId": "c64",
+      "cardId": "card-65",
+      "label": "Card 65",
       "faceIndex": 64,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/064-card-65.webp"
     },
     {
-      "cardId": "c65",
+      "cardId": "card-66",
+      "label": "Card 66",
       "faceIndex": 65,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/065-card-66.webp"
     },
     {
-      "cardId": "c66",
+      "cardId": "card-67",
+      "label": "Card 67",
       "faceIndex": 66,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/066-card-67.webp"
     },
     {
-      "cardId": "c67",
+      "cardId": "card-68",
+      "label": "Card 68",
       "faceIndex": 67,
-      "count": 1
-    },
-    {
-      "cardId": "c68",
-      "faceIndex": 68,
-      "count": 1
+      "count": 1,
+      "assetPath": "assets/textures/decks/shadow-collective-dark-side-deck-130/cards/067-card-68.webp"
     }
   ]
 }
