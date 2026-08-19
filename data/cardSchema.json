@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "breakingVersion": 1,
+  "name": "Star Wars: Trading Card Game Schema",
+  "source": {
+    "kind": "static",
+    "cardsPath": "assets/cards/swtcg.cards.json"
+  },
+  "fields": [
+    {
+      "key": "card_id",
+      "label": "Card ID",
+      "type": "text"
+    },
+    {
+      "key": "name",
+      "label": "Name",
+      "type": "text"
+    },
+    {
+      "key": "art",
+      "label": "Art",
+      "type": "text"
+    },
+    {
+      "key": "set",
+      "label": "Set",
+      "type": "text"
+    },
+    {
+      "key": "set_name",
+      "label": "Set name",
+      "type": "text"
+    },
+    {
+      "key": "side",
+      "label": "Side",
+      "type": "select",
+      "options": [
+        "L",
+        "D",
+        "N",
+        "Y"
+      ]
+    },
+    {
+      "key": "type",
+      "label": "Type",
+      "type": "select",
+      "options": [
+        "Battle",
+        "Character",
+        "Equipment",
+        "Event",
+        "Ground",
+        "Ground/Character",
+        "Location",
+        "Mission",
+        "Mission -Trap",
+        "Resource",
+        "Space",
+        "Space/Character",
+        "Space/Ground",
+        "Space/Ground/Character",
+        "Subordinate"
+      ]
+    },
+    {
+      "key": "subtype",
+      "label": "Subtype",
+      "type": "text"
+    },
+    {
+      "key": "cost",
+      "label": "Cost",
+      "type": "number"
+    },
+    {
+      "key": "speed",
+      "label": "Speed",
+      "type": "number"
+    },
+    {
+      "key": "power",
+      "label": "Power",
+      "type": "number"
+    },
+    {
+      "key": "health",
+      "label": "Health",
+      "type": "number"
+    },
+    {
+      "key": "rarity",
+      "label": "Rarity",
+      "type": "select",
+      "options": [
+        "R",
+        "U",
+        "C",
+        "P",
+        "S"
+      ]
+    },
+    {
+      "key": "card_number",
+      "label": "Card number",
+      "type": "text"
+    },
+    {
+      "key": "rules_text",
+      "label": "Rules text",
+      "type": "text"
+    },
+    {
+      "key": "classification",
+      "label": "Classification",
+      "type": "text"
+    }
+  ],
+  "roles": {
+    "key": "card_id",
+    "title": "name",
+    "art": "art",
+    "group": "type"
+  },
+  "filters": [
+    {
+      "fieldKey": "name",
+      "control": "text",
+      "label": "Name"
+    },
+    {
+      "fieldKey": "side",
+      "control": "enum-chips",
+      "label": "Side"
+    },
+    {
+      "fieldKey": "type",
+      "control": "enum-multi",
+      "label": "Type"
+    },
+    {
+      "fieldKey": "rarity",
+      "control": "enum-multi",
+      "label": "Rarity"
+    },
+    {
+      "fieldKey": "set",
+      "control": "enum-multi",
+      "label": "Set"
+    },
+    {
+      "fieldKey": "cost",
+      "control": "range",
+      "label": "Cost"
+    },
+    {
+      "fieldKey": "speed",
+      "control": "range"
+    },
+    {
+      "fieldKey": "power",
+      "control": "range"
+    },
+    {
+      "fieldKey": "health",
+      "control": "range"
+    },
+    {
+      "fieldKey": "rules_text",
+      "control": "text"
+    },
+    {
+      "fieldKey": "subtype",
+      "control": "text"
+    }
+  ],
+  "columns": [
+    {
+      "fieldKey": "name",
+      "header": "Name"
+    },
+    {
+      "fieldKey": "type",
+      "header": "Type"
+    },
+    {
+      "fieldKey": "cost",
+      "header": "Cost",
+      "align": "right"
+    },
+    {
+      "fieldKey": "speed",
+      "header": "Power",
+      "align": "right"
+    },
+    {
+      "fieldKey": "power",
+      "header": "Health",
+      "align": "right"
+    },
+    {
+      "fieldKey": "health",
+      "header": "Rarity"
+    },
+    {
+      "fieldKey": "rarity"
+    }
+  ],
+  "partitions": [
+    {
+      "id": "main",
+      "name": "Main deck",
+      "default": true
+    },
+    {
+      "id": "supply",
+      "name": "Supply"
+    }
+  ],
+  "stats": [
+    {
+      "kind": "histogram",
+      "fieldKey": "cost",
+      "label": "Cost curve"
+    },
+    {
+      "kind": "breakdown",
+      "fieldKey": "type",
+      "label": "Types"
+    },
+    {
+      "kind": "breakdown",
+      "fieldKey": "side",
+      "label": "Sides"
+    }
+  ],
+  "deckImport": {
+    "pluginId": "community.swtcg-deckdb"
+  }
+}
