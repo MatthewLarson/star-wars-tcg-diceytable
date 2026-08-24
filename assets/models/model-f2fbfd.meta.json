@@ -1,0 +1,22 @@
+{
+  "spawnHeight": 0.1,
+  "lightmapStatic": true,
+  "collider": {
+    "mode": "custom",
+    "entries": [
+      {
+        "id": "collider-1",
+        "name": "DiceTowerCollider",
+        "offset": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "convexHull",
+        "source": "baked",
+        "bakedPath": "assets/models/model-f2fbfd.collider.glb",
+        "simplifyRatio": 0.5
+      }
+    ]
+  }
+}
