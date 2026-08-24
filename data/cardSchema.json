@@ -1,7 +1,6 @@
 {
   "version": 1,
   "breakingVersion": 1,
-  "name": "Star Wars: Trading Card Game Schema",
   "source": {
     "kind": "static",
     "cardsPath": "assets/cards/swtcg.cards.json"
@@ -154,26 +153,6 @@
       "fieldKey": "cost",
       "control": "range",
       "label": "Cost"
-    },
-    {
-      "fieldKey": "speed",
-      "control": "range"
-    },
-    {
-      "fieldKey": "power",
-      "control": "range"
-    },
-    {
-      "fieldKey": "health",
-      "control": "range"
-    },
-    {
-      "fieldKey": "rules_text",
-      "control": "text"
-    },
-    {
-      "fieldKey": "subtype",
-      "control": "text"
     }
   ],
   "columns": [
@@ -191,21 +170,18 @@
       "align": "right"
     },
     {
-      "fieldKey": "speed",
+      "fieldKey": "power",
       "header": "Power",
       "align": "right"
     },
     {
-      "fieldKey": "power",
+      "fieldKey": "health",
       "header": "Health",
       "align": "right"
     },
     {
-      "fieldKey": "health",
+      "fieldKey": "rarity",
       "header": "Rarity"
-    },
-    {
-      "fieldKey": "rarity"
     }
   ],
   "partitions": [

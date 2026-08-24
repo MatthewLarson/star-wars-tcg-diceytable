@@ -11,13 +11,11 @@
   "assets": [
     "assets/cards/swtcg.cards.json",
     "assets/cover.webp",
-    "assets/decks/all-the-duchess-s-men-light-side-deck-129.deck.json",
-    "assets/decks/luke-s-rally-light-side-deck-132.deck.json",
-    "assets/decks/shadow-collective-dark-side-deck-130.deck.json",
-    "assets/decks/trading-up-dark-side-deck-131.deck.json",
     "assets/models/disgruntled-tokens-a7d556.glb",
     "assets/models/model-1a5848.glb",
+    "assets/models/model-f2fbfd.collider.glb",
     "assets/models/model-f2fbfd.glb",
+    "assets/models/model-f2fbfd.meta.json",
     "assets/textures/card-back.webp",
     "assets/textures/counter-1.webp",
     "assets/textures/counter-2.webp",
@@ -43,10 +41,6 @@
     "assets/textures/counter-subtype-misc.webp",
     "assets/textures/counter-temp.webp",
     "assets/textures/counter-trigger.webp",
-    "assets/textures/decks/all-the-duchess-s-men-light-side-deck-129/sheet-1.webp",
-    "assets/textures/decks/luke-s-rally-light-side-deck-132/sheet-1.webp",
-    "assets/textures/decks/shadow-collective-dark-side-deck-130/sheet-1.webp",
-    "assets/textures/decks/trading-up-dark-side-deck-131/sheet-1.webp",
     "assets/textures/play-mat.webp",
     "data/cardSchema.json",
     "media/cover-thumb.webp",
@@ -59,8 +53,7 @@
   "capabilities": {
     "version": "1",
     "allowed": [
-      "log",
-      "plugin-call"
+      "log"
     ]
   },
   "license": "MIT",
@@ -89,16 +82,6 @@
         "w": 1,
         "h": 0.5625
       }
-    }
-  ],
-  "plugins": [
-    {
-      "id": "community.swtcg-deckdb",
-      "functions": [
-        "deckById",
-        "starterDecks",
-        "publicDecks"
-      ]
     }
   ]
 }
