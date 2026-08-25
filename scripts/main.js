@@ -69,6 +69,9 @@ var MAX_STACK = 1000;
 /** Deck rows drawn per page. Keeps one rebuild well inside the per-tick UI mutation budget. */
 var PAGE_SIZE = 10;
 
+/** How long a burst of typing is collapsed for before the results redraw. */
+var SEARCH_REDRAW_DELAY_MS = 300;
+
 /**
  * The provider's `side` codes, in the order the chips are drawn.
  *
@@ -415,7 +418,9 @@ function makePicker(audience, who) {
     /** Deck id per drawn row, so a click resolves without the id being in the element id. */
     rowDeckIds: [],
     /** How many result rows currently exist, so a shorter page deletes the surplus. */
-    rowCount: 0
+    rowCount: 0,
+    /** Pending debounced results redraw, or null. See `scheduleResultsRedraw`. */
+    redrawTimer: null
   };
   pickers[token] = picker;
   return picker;
@@ -467,6 +472,10 @@ async function closePicker(picker) {
   if (!picker) {
     return;
   }
+  if (picker.redrawTimer !== null) {
+    clearTimeout(picker.redrawTimer);
+    picker.redrawTimer = null;
+  }
   // Deleting the root takes the whole subtree with it, so the children need no individual drop.
   await drop(picker.root);
   delete pickers[picker.token];
@@ -486,6 +495,46 @@ async function closePicker(picker) {
  * The one exception is the result rows: a shorter page deletes the surplus, because there is no
  * "hidden" flag on an element and an empty row is still a row.
  */
+/**
+ * Redraw ONLY the result list, its pager and the status line, after a short delay.
+ *
+ * Two separate savings, both needed. The delay collapses a burst of keystrokes into one
+ * redraw; the narrower redraw costs ~13 `setUiElement` calls instead of ~30. Together they
+ * keep typing comfortably inside the host's 120-mutations-per-tick budget, which a redraw per
+ * keystroke blew through after four characters.
+ *
+ * `setTimeout` is the only timer a mod may use; the repeating one is refused by the publish
+ * scanner, deliberately, so a mod cannot install a loop.
+ */
+function scheduleResultsRedraw(picker) {
+  if (picker.redrawTimer !== null) {
+    return;
+  }
+  picker.redrawTimer = setTimeout(function () {
+    picker.redrawTimer = null;
+    if (pickers[picker.token]) {
+      void renderCatalogueView(picker);
+      void renderStatus(picker);
+    }
+  }, SEARCH_REDRAW_DELAY_MS);
+}
+
+/** The status line, on its own, so an import can report without redrawing the whole dialog. */
+async function renderStatus(picker) {
+  await put({
+    id: picker.root + "-status",
+    parentId: picker.root,
+    type: "text",
+    order: 90,
+    props: {
+      text: picker.status,
+      variant: picker.status.indexOf("Could not") === 0 || picker.status.indexOf("No public deck") === 0
+        ? "error"
+        : "caption"
+    }
+  });
+}
+
 async function renderPicker(picker) {
   if (!canDraw || !pickers[picker.token]) {
     return;
@@ -515,13 +564,7 @@ async function renderPicker(picker) {
   } else {
     await renderCatalogueView(picker);
   }
-  await put({
-    id: id + "-status",
-    parentId: id,
-    type: "text",
-    order: 90,
-    props: { text: picker.status, variant: picker.status.indexOf("Could not") === 0 ? "error" : "caption" }
-  });
+  await renderStatus(picker);
 }
 
 async function renderTabs(picker) {
@@ -871,7 +914,10 @@ async function renderReopenButton() {
   await put({
     id: REOPEN_ID,
     type: "button",
-    presentation: { mode: "screen", anchor: "upper-right", offsetX: 16, offsetY: 16 },
+    // NOT the upper-right corner. That is where the table toolbar sits on desktop, and on a
+    // phone the toolbar covers it outright — the button shipped there and was unreachable.
+    // The left edge is free at every width.
+    presentation: { mode: "screen", anchor: "middle-left", offsetX: 12, offsetY: 0 },
     props: { text: "Choose a deck", variant: "secondary", onClick: "swtcgOpen" }
   });
 }
@@ -929,7 +975,7 @@ async function runImport(picker, deckId) {
   }
   picker.busy = true;
   picker.status = "Importing " + deckId + "…";
-  await renderPicker(picker);
+  await renderStatus(picker);
 
   var message = await importDeckId(deckId);
 
@@ -938,7 +984,7 @@ async function runImport(picker, deckId) {
     return;
   }
   picker.status = message;
-  await renderPicker(picker);
+  await renderStatus(picker);
 }
 
 /* ------------------------------------------------------------------------------------------- */
@@ -991,7 +1037,13 @@ api.on("swtcgSearch", function (payload) {
   }
   picker.search = text(payload.value);
   picker.page = 0;
-  void renderPicker(picker);
+  // DEBOUNCED, and only the results are redrawn.
+  //
+  // A full redraw is ~30 `setUiElement` calls and the host allows 120 UI mutations per TICK
+  // across every mod. Redrawing everything on each keystroke therefore exhausted the budget
+  // after four characters, at which point `setUiElement` starts returning null and the dialog
+  // silently stops updating — which is what "the search doesn't work and it locks up" was.
+  scheduleResultsRedraw(picker);
 });
 
 api.on("swtcgOwner", function (payload) {
@@ -1009,8 +1061,8 @@ api.on("swtcgLink", function (payload) {
   if (!picker) {
     return;
   }
-  // Typing does not re-render: the input already shows what was typed, and a rebuild on every
-  // keystroke would spend the whole per-tick UI budget and fight the caret.
+  // Just record it. The field holds its own text on the client, so there is nothing to redraw
+  // for a keystroke — and redrawing would spend the per-tick mutation budget for nothing.
   picker.link = text(payload.value);
 });
 
