@@ -193,6 +193,10 @@
     {
       "id": "supply",
       "name": "Supply"
+    },
+    {
+      "id": "resource",
+      "name": "Resource"
     }
   ],
   "stats": [
@@ -210,6 +214,73 @@
       "kind": "breakdown",
       "fieldKey": "side",
       "label": "Sides"
+    }
+  ],
+  "layouts": [
+    {
+      "id": "character",
+      "name": "Character",
+      "match": [
+        {
+          "fieldKey": "type",
+          "op": "equals",
+          "value": "Character"
+        }
+      ],
+      "regions": [
+        {
+          "id": "image-region",
+          "label": "Image",
+          "rect": {
+            "x": 0.055,
+            "y": 0.145,
+            "w": 0.885,
+            "h": 0.495
+          },
+          "face": "front",
+          "binding": {
+            "kind": "counter",
+            "counterId": "damage-token",
+            "render": "number"
+          },
+          "visibility": "hidden",
+          "mutation": "controller"
+        }
+      ]
+    }
+  ],
+  "counters": [
+    {
+      "id": "damage-token",
+      "name": "Damage",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-damage.webp"
+      },
+      "label": "D",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "persist",
+      "mutation": "controller"
+    },
+    {
+      "id": "build-token",
+      "name": "Build",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-build.webp"
+      },
+      "label": "B",
+      "anchor": "bottom-left",
+      "stacking": "number",
+      "max": 99,
+      "visibility": "hidden",
+      "face": "back",
+      "flip": "discharge",
+      "mutation": "controller"
     }
   ],
   "deckImport": {
