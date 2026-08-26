@@ -1,6 +1,7 @@
 {
   "version": 1,
   "breakingVersion": 1,
+  "name": "SWTCG Cards",
   "source": {
     "kind": "static",
     "cardsPath": "assets/cards/swtcg.cards.json"
@@ -121,7 +122,8 @@
     "key": "card_id",
     "title": "name",
     "art": "art",
-    "group": "type"
+    "group": "type",
+    "type": "type"
   },
   "filters": [
     {
@@ -193,6 +195,10 @@
     {
       "id": "supply",
       "name": "Supply"
+    },
+    {
+      "id": "resource",
+      "name": "Resource"
     }
   ],
   "stats": [
@@ -210,6 +216,575 @@
       "kind": "breakdown",
       "fieldKey": "side",
       "label": "Sides"
+    }
+  ],
+  "layouts": [
+    {
+      "id": "portrait-cards",
+      "name": "Portrait Cards",
+      "types": [
+        "Character",
+        "Ground",
+        "Ground/Character",
+        "Space",
+        "Space/Character",
+        "Space/Ground",
+        "Space/Ground/Character",
+        "Subordinate"
+      ],
+      "regions": [
+        {
+          "id": "portrait-card-image-region",
+          "label": "Portrait Card Image Region",
+          "rect": {
+            "x": 0.055,
+            "y": 0.15,
+            "w": 0.885,
+            "h": 0.49
+          },
+          "face": "front",
+          "binding": {
+            "kind": "counter",
+            "counterIds": [
+              "build-counter",
+              "damage-counter",
+              "force-counter",
+              "trigger-counter",
+              "temp-counter",
+              "subtype-misc-counter",
+              "subtype-light-counter",
+              "subtype-dark-counter",
+              "static-counter",
+              "resource-counter",
+              "misc-yellow-counter",
+              "misc-turquois-counter",
+              "misc-purple-counter",
+              "mastery-counter",
+              "pilot-counter",
+              "activated-counter",
+              "credit-counter",
+              "corruption-counter",
+              "1-counter",
+              "2-counter",
+              "3-counter",
+              "4-counter",
+              "5-counter",
+              "6-counter"
+            ],
+            "render": "chips"
+          },
+          "style": {
+            "color": "#000000",
+            "outline": "#000000",
+            "align": "center"
+          },
+          "visibility": "hidden",
+          "mutation": "controller"
+        },
+        {
+          "id": "landscape-build-region",
+          "label": "Landscape Build Region",
+          "rect": {
+            "x": 0.01,
+            "y": 0.13,
+            "w": 0.18,
+            "h": 0.15
+          },
+          "face": "back",
+          "binding": {
+            "kind": "counter",
+            "counterIds": [
+              "build-counter"
+            ],
+            "render": "chips",
+            "chipMinSizePct": 100,
+            "chipMaxSizePct": 100
+          },
+          "style": {
+            "color": "#000000",
+            "outline": "#000000"
+          },
+          "visibility": "full",
+          "mutation": "controller"
+        }
+      ]
+    },
+    {
+      "id": "landscape-cards",
+      "name": "Landscape Cards",
+      "match": [],
+      "types": [
+        "Battle",
+        "Equipment",
+        "Event",
+        "Location",
+        "Mission",
+        "Mission -Trap",
+        "Resource"
+      ],
+      "regions": [
+        {
+          "id": "landscape-counter-region",
+          "label": "Landscape Counter Region",
+          "rect": {
+            "x": 0.06,
+            "y": 0.21,
+            "w": 0.885,
+            "h": 0.475
+          },
+          "face": "front",
+          "binding": {
+            "kind": "counter",
+            "counterIds": [
+              "build-counter",
+              "damage-counter",
+              "trigger-counter",
+              "temp-counter",
+              "subtype-misc-counter",
+              "subtype-light-counter",
+              "subtype-dark-counter",
+              "static-counter",
+              "resource-counter",
+              "misc-yellow-counter",
+              "misc-turquois-counter",
+              "misc-purple-counter",
+              "mastery-counter",
+              "pilot-counter",
+              "activated-counter",
+              "force-counter",
+              "credit-counter",
+              "corruption-counter",
+              "1-counter",
+              "2-counter",
+              "3-counter",
+              "4-counter",
+              "5-counter",
+              "6-counter"
+            ],
+            "render": "chips",
+            "chipMinSizePct": 10,
+            "chipMaxSizePct": 20
+          },
+          "style": {
+            "color": "#000000",
+            "outline": "#000000"
+          },
+          "visibility": "hidden",
+          "mutation": "controller"
+        },
+        {
+          "id": "landscape-build-region",
+          "label": "Landscape Build Region",
+          "rect": {
+            "x": 0.72,
+            "y": 0.01,
+            "w": 0.15,
+            "h": 0.18
+          },
+          "face": "back",
+          "binding": {
+            "kind": "counter",
+            "counterIds": [
+              "build-counter"
+            ],
+            "render": "chips",
+            "chipMinSizePct": 100,
+            "chipMaxSizePct": 100
+          },
+          "style": {
+            "color": "#000000",
+            "outline": "#000000"
+          },
+          "visibility": "full",
+          "mutation": "host"
+        }
+      ]
+    }
+  ],
+  "counters": [
+    {
+      "id": "damage-counter",
+      "name": "Damage Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-damage.webp"
+      },
+      "label": "D",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "build-counter",
+      "name": "Build Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-build.webp"
+      },
+      "label": "B",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "full",
+      "face": "back",
+      "flip": "persist",
+      "mutation": "controller"
+    },
+    {
+      "id": "trigger-counter",
+      "name": "Trigger Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-trigger.webp"
+      },
+      "label": "Tr",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "temp-counter",
+      "name": "Temp Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-temp.webp"
+      },
+      "label": "Te",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "subtype-misc-counter",
+      "name": "Subtype Misc Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-subtype-misc.webp"
+      },
+      "label": "SM",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "subtype-light-counter",
+      "name": "Subtype Light Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-subtype-light.webp"
+      },
+      "label": "SL",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "subtype-dark-counter",
+      "name": "Subtype Dark Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-subtype-dark.webp"
+      },
+      "label": "SD",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "static-counter",
+      "name": "Static Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-static.webp"
+      },
+      "label": "St",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "resource-counter",
+      "name": "Resource Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-resource.webp"
+      },
+      "label": "Re",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "misc-yellow-counter",
+      "name": "Misc Yellow Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-misc-yellow.webp"
+      },
+      "label": "MY",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "misc-turquois-counter",
+      "name": "Misc Turquois Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-misc-turquoise.webp"
+      },
+      "label": "MT",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "misc-purple-counter",
+      "name": "Misc Purple Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-misc-purple.webp"
+      },
+      "label": "MP",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "mastery-counter",
+      "name": "Mastery Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-mastery.webp"
+      },
+      "label": "Ma",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "pilot-counter",
+      "name": "Pilot Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-granted-pilot-ability.webp"
+      },
+      "label": "Pi",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "activated-counter",
+      "name": "Activated Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-granted-activated-ability.webp"
+      },
+      "label": "Ac",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "force-counter",
+      "name": "Force Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-force.webp"
+      },
+      "label": "F",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "credit-counter",
+      "name": "Credit Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-credit.webp"
+      },
+      "label": "Cr",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "corruption-counter",
+      "name": "Corruption Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-corruption.webp"
+      },
+      "label": "Co",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "1-counter",
+      "name": "1 Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-1.webp"
+      },
+      "label": "1",
+      "anchor": "bottom-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "2-counter",
+      "name": "2 Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-2.webp"
+      },
+      "label": "2",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "3-counter",
+      "name": "3 Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-3.webp"
+      },
+      "label": "3",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "4-counter",
+      "name": "4 Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-4.webp"
+      },
+      "label": "4",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "5-counter",
+      "name": "5 Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-5.webp"
+      },
+      "label": "5",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
+    },
+    {
+      "id": "6-counter",
+      "name": "6 Counter",
+      "art": {
+        "kind": "asset",
+        "path": "assets/textures/counter-6.webp"
+      },
+      "label": "6",
+      "anchor": "top-left",
+      "stacking": "number",
+      "max": 9999,
+      "visibility": "hidden",
+      "face": "front",
+      "flip": "discharge",
+      "mutation": "controller"
     }
   ],
   "deckImport": {
