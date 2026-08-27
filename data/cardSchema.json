@@ -410,9 +410,13 @@
         "path": "assets/textures/counter-damage.webp"
       },
       "label": "D",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
-      "max": 9999,
+      "max": 1,
       "visibility": "hidden",
       "face": "front",
       "flip": "discharge",
@@ -426,9 +430,13 @@
         "path": "assets/textures/counter-build.webp"
       },
       "label": "B",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
-      "max": 9999,
+      "max": 1,
       "visibility": "full",
       "face": "back",
       "flip": "persist",
@@ -442,9 +450,13 @@
         "path": "assets/textures/counter-trigger.webp"
       },
       "label": "Tr",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
-      "max": 9999,
+      "max": 1,
       "visibility": "hidden",
       "face": "front",
       "flip": "discharge",
@@ -458,9 +470,13 @@
         "path": "assets/textures/counter-temp.webp"
       },
       "label": "Te",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
-      "max": 9999,
+      "max": 1,
       "visibility": "hidden",
       "face": "front",
       "flip": "discharge",
