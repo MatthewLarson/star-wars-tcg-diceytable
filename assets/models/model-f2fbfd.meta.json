@@ -1,5 +1,6 @@
 {
   "spawnHeight": 0.1,
+  "locked": true,
   "lightmapStatic": true,
   "collider": {
     "mode": "custom",
@@ -12,10 +13,8 @@
           "y": 0,
           "z": 0
         },
-        "shape": "convexHull",
-        "source": "baked",
-        "bakedPath": "assets/models/model-f2fbfd.collider.glb",
-        "simplifyRatio": 0.5
+        "shape": "mesh",
+        "source": "render"
       }
     ]
   }

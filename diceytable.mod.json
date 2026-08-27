@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
