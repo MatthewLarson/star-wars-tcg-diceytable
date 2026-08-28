@@ -440,5 +440,57 @@ console.log("\n12. a seat with no zones still loads, and names what is missing")
   ZONES.push(...kept);
 }
 
+/* ------------------------------------------------------------------ */
+console.log("\n13. a HOST whose seat context arrives AFTER boot still works");
+{
+  // 🔴 The live failure, 2026-08-28. `api.getMySeat()` reads context the host pushes into the
+  // frame, and on a resume that push can land after this script has booted — nobody takes a
+  // seat, so no onSeatChanged fires either. Reading the seat once at boot turned "not yet" into
+  // "never": the dialog said "take a seat first" at somebody who was sitting down, and every
+  // tab in it stayed empty.
+  const table = makeTable();
+  const host = makePeer("host", {
+    isHost: true, peerId: "peer-host", seat: null, table,
+    decks: [{ ...HOST_DECK, entries: undefined }],
+    deckRecords: { [HOST_DECK.id]: HOST_DECK }
+  });
+  run(host);
+  await tick();
+
+  // Boot saw no seat. It must still have read the shelf, or there is nothing to draw later.
+  check("the shelf is read even with no seat yet",
+    host.calls.ui.some((e) => e.id === "swtcg-nag"), "no nag button");
+
+  // The context lands. No hook fires for it — that is the whole point.
+  host.options.seat = "red";
+  await table.click(host, "swtcg-nag");
+
+  const root = dialogRootFor(host, host);
+  check("a dialog opens for the host", !!root, root);
+  const modal = host.calls.ui.filter((e) => e.id === root && e.presentation?.mode === "modal").pop();
+  check("and it knows the seat", /red seat needs a deck/.test(modal?.presentation.subtitle ?? ""),
+    modal?.presentation.subtitle);
+
+  const rows = rowsOf(host, root);
+  check("its own decks are listed", rows.length > 0 && rows[0].props.text.includes("Host's Secret Deck"),
+    rows.map((r) => r.props.text));
+
+  await table.click(host, rows[0].id);
+  const piles = host.calls.created.filter((o) => o.kind === "deck");
+  check("and loading one places it at that seat", piles[0]?.metadata.swtcgSeat === "red",
+    piles[0]?.metadata.swtcgSeat);
+}
+
+/* ------------------------------------------------------------------ */
+console.log("\n14. the nag button is out of the status pills' corner");
+{
+  const { host } = await stand();
+  const nag = host.calls.ui.find((e) => e.id === "swtcg-nag");
+  // Upper right is where the save indicator and the host/connection pills live; the button
+  // rendered underneath them.
+  check("not anchored upper-right", nag?.presentation.anchor !== "upper-right", nag?.presentation);
+  check("centered along an empty edge", nag?.presentation.anchor === "bottom-center", nag?.presentation);
+}
+
 console.log(`\n${failures === 0 ? "ALL CHECKS PASSED" : `${failures} CHECK(S) FAILED`}`);
 process.exit(failures === 0 ? 0 : 1);

@@ -641,13 +641,54 @@ async function renderNagButton(waiting) {
   await put({
     id: NAG_ID,
     type: "button",
-    presentation: { mode: "screen", anchor: "upper-right", offsetX: 16, offsetY: 16 },
+    // Bottom centre, not the upper right: that corner holds the save indicator and the
+    // host/connection pills, and this button landed underneath them. The toolbar owns the
+    // upper centre, the player card the lower left and the view controls the lower right, which
+    // leaves exactly one uncluttered place for a call to action.
+    presentation: { mode: "screen", anchor: "bottom-center", offsetX: 0, offsetY: -24 },
     props: {
       text: waiting ? "Choose your deck to start" : "Load another deck",
       variant: waiting ? "primary" : "secondary",
       onClick: "swtcgOpen"
     }
   });
+}
+
+/**
+ * This peer's seat, read at the MOMENT OF USE.
+ *
+ * 🔴 `api.getMySeat()` reads context the host pushes into the frame, and that push can land
+ * after the script has booted — a resume seats nobody, so no `onSeatChanged` fires and a seat
+ * held since before the mod loaded arrives late or not at all. Reading it once at boot and
+ * caching the answer turned "not yet" into "never", and every seat-dependent branch below then
+ * reported that the player was not sitting down.
+ *
+ * Cheap enough to call on every render: it is a synchronous read of a local object.
+ */
+function mySeatNow() {
+  try {
+    return api.getMySeat() || null;
+  } catch (error) {
+    return null;
+  }
+}
+
+/**
+ * Refresh a dialog's seat from the live context, and report the decks it needs.
+ *
+ * A dialog opened before the seat was known keeps `seat: null` forever otherwise — the modal
+ * would sit there saying "take a seat first" at somebody who is sitting down.
+ */
+function refreshPickerSeat(picker) {
+  if (picker.seat || picker.peerId !== SELF) {
+    return false;
+  }
+  var seat = mySeatNow();
+  if (!seat) {
+    return false;
+  }
+  picker.seat = seat;
+  return true;
 }
 
 /** Re-state the nag for one seat, once its deck status is known. */
@@ -684,9 +725,8 @@ async function ensureCatalogue() {
     // The failure enum is deliberately coarse — `unavailable | rate-limited | not-found | refused`
     // — so a plugin cannot probe its own budget. Say what the player can act on, not more.
     var reason = result && result.reason ? result.reason : "unavailable";
-    catalogueError = reason === "rate-limited"
-      ? "The deck database is busy. Try again shortly."
-      : "Could not reach the deck database. You can still paste a deck link.";
+    catalogueError = describePluginFailure(reason, "The deck database is busy. Try again shortly.")
+      + " You can still paste a deck link.";
     return;
   }
 
@@ -707,6 +747,30 @@ async function ensureCatalogue() {
     });
   }
   catalogue = rows;
+}
+
+/**
+ * Turn a plugin failure into a sentence the player can act on.
+ *
+ * The enum is deliberately coarse — `unavailable | rate-limited | not-found | refused` — so a
+ * plugin cannot probe its own budget. But two of the four are not outages at all and were being
+ * reported as one: `not-found` means this TABLE has not enabled the plugin (a registered plugin
+ * is inert until a room selects it), and `refused` means the platform declined the call. Telling
+ * somebody "could not reach the deck database" when the real answer is "switch it on in this
+ * room's settings" sends them to look at the wrong thing entirely.
+ */
+function describePluginFailure(reason, whenBusy) {
+  if (reason === "rate-limited") {
+    return whenBusy;
+  }
+  if (reason === "not-found") {
+    return "This table does not have the swtcg-deckdb plugin enabled. Turn it on in the room's"
+      + " settings, or use My decks / Community decks instead.";
+  }
+  if (reason === "refused") {
+    return "The deck database plugin is installed but was refused for this table.";
+  }
+  return "Could not reach the deck database right now.";
 }
 
 /** The deck-db rows one picker's filters select, in catalogue order. */
@@ -737,13 +801,15 @@ async function importDeckDb(seat, deckId) {
 
   if (!result || result.ok !== true) {
     var reason = result && result.reason ? result.reason : "unavailable";
+    // ⚠ `not-found` is ambiguous HERE in a way it is not on the browse call: it means either "no
+    // such deck" or "this table has not enabled the plugin". Both are worth saying, because a
+    // player who pasted a good link and a player on a table with no plugin would otherwise get
+    // the same flatly wrong sentence.
     if (reason === "not-found") {
-      return "No public deck with id " + deckId + ".";
+      return "No public deck with id " + deckId + " — or this table does not have the"
+        + " swtcg-deckdb plugin enabled.";
     }
-    if (reason === "rate-limited") {
-      return "The deck database is busy. Try again shortly.";
-    }
-    return "Could not reach the deck database.";
+    return describePluginFailure(reason, "The deck database is busy. Try again shortly.");
   }
 
   var deck = result.data || {};
@@ -830,7 +896,7 @@ async function sendMyDeck(deckId) {
   if (canDraw) {
     // The host loading its OWN deck takes the same path a remote one does, so there is one
     // placement routine rather than two that can disagree.
-    applyChosenDeck(api.getMySeat(), SELF, payload);
+    applyChosenDeck(mySeatNow(), SELF, payload);
     return;
   }
   await api.sendToHost(MSG_LOAD, payload);
@@ -952,6 +1018,8 @@ async function renderPicker(picker) {
   if (!canDraw || !pickers[picker.token]) {
     return;
   }
+  // The seat may have arrived since this dialog opened; see `mySeatNow`.
+  refreshPickerSeat(picker);
   var id = picker.root;
 
   await put({
@@ -1392,6 +1460,7 @@ async function runLoad(picker, task) {
   if (picker.busy) {
     return;
   }
+  refreshPickerSeat(picker);
   if (!picker.seat) {
     picker.status = "Take a seat first — a deck belongs to a seat.";
     await renderPicker(picker);
@@ -1751,13 +1820,14 @@ api.on("swtcgOpen", function (payload) {
   if (!payload || typeof payload.actorPeerId !== "string") {
     return;
   }
-  // PLAYER half: reopening is also a cue to refresh what the host has of my shelf. The nag
-  // button belongs to no dialog, so isActorPeer cannot place it on the host — which is fine,
-  // because the host's own entry was filled at boot and is refreshed on every tab switch.
-  if (!canDraw) {
-    void reportMyDecks("mine", "");
-    void reportMyDecks("public", "");
-  }
+  // Reopening is a cue to refresh this peer's own shelf, on EVERY peer.
+  //
+  // It used to be guarded on `!canDraw`, on the reasoning that the host's entry was filled at
+  // boot. That reasoning failed exactly when it mattered: boot only reports when it already knows
+  // a seat, so a host whose seat context had not arrived reported nothing at boot and nothing
+  // here either, and its own dialog said "Looking for your decks…" for ever.
+  void reportMyDecks("mine", "");
+  void reportMyDecks("public", "");
 
   // HOST half. `force`, because this button is somebody asking: a player who wants a second deck
   // should get the dialog rather than a silent no-op.
@@ -1768,8 +1838,9 @@ api.on("swtcgOpen", function (payload) {
   // a peer whose seat this script never recorded is the host's own.
   var actorSeat = seatByPeer[payload.actorPeerId] || null;
   var key = payload.actorPeerId;
-  if (!actorSeat && api.getMySeat()) {
-    actorSeat = api.getMySeat();
+  var localSeat = mySeatNow();
+  if (!actorSeat && localSeat) {
+    actorSeat = localSeat;
     key = SELF;
   }
   void openPicker(
@@ -1827,7 +1898,7 @@ api.on("onSeatChanged", function (payload) {
   // PLAYER half. `api.getMySeat()` is this peer's own seat, and a seat holds one person — so a
   // seat change naming MY seat is me sitting down. Report my shelf now, so the host has rows to
   // draw the moment it opens the dialog rather than an empty list and a spinner.
-  if (payload.seat === api.getMySeat()) {
+  if (payload.seat === mySeatNow()) {
     void reportMyDecks("mine", "");
     void reportMyDecks("public", "");
   }
@@ -1853,16 +1924,16 @@ api.on("onSeatChanged", function (payload) {
  * nag button and nothing more, which is right: a host who is spectating has no deck to draw.
  */
 async function boot() {
-  var seat = api.getMySeat();
+  var seat = mySeatNow();
   await renderNagButton(seat ? !(await seatHasDeck(seat)) : true);
 
-  // Every peer reports its own shelf at boot, host included. Deliberately AFTER the nag button:
-  // that first `put` is what settles `canDraw`, and `reportMyDecks` branches on it to decide
-  // whether to store locally or send up.
-  if (seat) {
-    void reportMyDecks("mine", "");
-    void reportMyDecks("public", "");
-  }
+  // Every peer reports its own shelf at boot, host included, and WITHOUT waiting to know a seat:
+  // a shelf is worth reading either way, and gating it on the seat is what left a host whose seat
+  // context had not yet arrived with an empty dialog it could never fill. Deliberately after the
+  // nag button, because that first `put` is what settles `canDraw`, and `reportMyDecks` branches
+  // on it to decide whether to store locally or send up.
+  void reportMyDecks("mine", "");
+  void reportMyDecks("public", "");
 
   if (!canDraw || !seat) {
     return;
