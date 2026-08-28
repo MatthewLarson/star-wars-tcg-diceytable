@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -54,7 +54,16 @@
     "version": "1",
     "allowed": [
       "log",
-      "plugin-call"
+      "ui",
+      "read-context",
+      "read-world",
+      "subscribe-events",
+      "spawn-object",
+      "object-action",
+      "plugin-call",
+      "read-cards",
+      "read-decks",
+      "host-message"
     ]
   },
   "license": "MIT",
