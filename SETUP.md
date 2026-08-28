@@ -73,6 +73,29 @@ in the deck's `resource` partition, then the main deck, then the supply. It is *
 the pile it came from, so the same card is never on the table twice. A deck with no resource still
 loads and says so.
 
+## Card art
+
+Piles carry `metadata.cardSource` — a provenance slice naming this game as the card source —
+and the PLATFORM resolves the faces from `data/cardSchema.json` and
+`assets/cards/swtcg.cards.json`. That is what supplies:
+
+- the mod's own card back (`assets/textures/card-back.webp`) instead of the built-in one,
+- one packed sprite sheet per pile rather than a texture per card,
+- and the per-card rotation this game needs, because it prints Battle, Mission, Equipment,
+  Location, Resource and Event **landscape** and Character, Ground and Space **portrait**.
+
+Resolution matches on the catalogue key (`card_id`) and nothing else, so the script rewrites
+every entry to that key before spawning. It has to: a DiceyTable deck stores `card_id`, and the
+deck-db plugin hands back card NAMES. `api.resolveCards` accepts either and returns the row,
+which is where the two are joined.
+
+A card this catalogue does not know keeps the id it came with, renders blank, and is counted in
+the load message — a stale decklist should say so rather than quietly shrink.
+
+An earlier version attached a `faceUrls` map of art URLs instead. It worked and looked wrong:
+that path renders each URL as a whole texture at a fixed rotation, so every landscape card was
+stretched onto portrait stock, and it carries no card back at all.
+
 ## Checking a change
 
 ```bash

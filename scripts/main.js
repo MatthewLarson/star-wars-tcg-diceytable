@@ -105,6 +105,27 @@ var PAGE_SIZE = 8;
 /** The catalogue `type` value that counts as a resource. */
 var RESOURCE_TYPE = "resource";
 
+/**
+ * This game's card source, as `data/cardSchema.json` defines it.
+ *
+ * `version` is the schema's BREAKING version, not the mod's release version: it is the deck
+ * pool's identity, and it changes only when the card model changes incompatibly.
+ */
+var CARD_SOURCE = { kind: "mod", id: "star-wars-tcg", version: 1 };
+
+/**
+ * How far the resource card is turned in its zone, in degrees.
+ *
+ * Star Wars TCG prints Resource cards LANDSCAPE, and the platform deliberately keeps a rotated
+ * card on ordinary portrait stock with its art sideways — `normalizeRotatedCardBodies` actively
+ * puts a landscape body back. So the card that has to turn is the physical one, and turning it is
+ * this game's call rather than the platform's: a resource laid in its zone reads upright only if
+ * the card itself is on its side.
+ *
+ * Flip the sign if it comes out upside down; nothing else depends on which way it goes.
+ */
+var RESOURCE_TURN_DEGREES = 90;
+
 /** Partition ids this game's `data/cardSchema.json` declares. */
 var PARTITION_MAIN = "main";
 var PARTITION_SUPPLY = "supply";
@@ -436,17 +457,54 @@ async function resolveRows(entries) {
   return byKey;
 }
 
-/** The `art` URL for each resolved card, ready to become `metadata.faceUrls`. */
-function faceUrlsFrom(byKey) {
-  var faceUrls = {};
-  var keys = Object.keys(byKey);
-  for (var i = 0; i < keys.length; i += 1) {
-    var art = byKey[keys[i]].art;
-    if (typeof art === "string" && art.length > 0) {
-      faceUrls[keys[i]] = art;
+/**
+ * Rewrite every entry's id to the catalogue's OWN key, and report what did not resolve.
+ *
+ * 🔴 **This is what lets the platform render the cards properly.** A pile carrying
+ * `metadata.cardSource` has its art resolved by the platform against this mod's catalogue — which
+ * gives it the mod's own card back, one packed sheet per pile, and the mixed-orientation handling
+ * this game needs (landscape Battle/Mission/Equipment/Location/Resource/Event alongside portrait
+ * Character/Ground/Space). That resolution matches on the catalogue KEY and nothing else.
+ *
+ * The two deck sources do not agree on what an entry names: a DiceyTable deck stores `card_id`,
+ * and the deck-db plugin hands back NAMES. `api.resolveCards` accepts either — it falls back to a
+ * name match — and every row it returns carries its own `card_id`, so this is where the two are
+ * made one.
+ *
+ * An entry that resolves to nothing keeps the id it came with. It will render blank rather than
+ * render as the wrong card, and the count is reported so the player is told.
+ */
+function canonicaliseEntries(entries, byKey) {
+  var unresolved = 0;
+  var out = [];
+  for (var i = 0; i < entries.length; i += 1) {
+    var entry = entries[i];
+    var key = baseKey(entry.cardId);
+    var suffix = text(entry.cardId).slice(key.length);
+    var row = byKey[key];
+    var canonical = row && typeof row.card_id === "string" && row.card_id.length > 0
+      ? row.card_id
+      : null;
+    if (!canonical) {
+      unresolved += 1;
     }
+    out.push({ cardId: (canonical || key) + suffix, faceDown: entry.faceDown });
   }
-  return faceUrls;
+  return { entries: out, unresolved: unresolved };
+}
+
+/**
+ * The provenance slice that tells the platform where a pile's ids resolve.
+ *
+ * Strictly validated on the way in (`catalogueDeckMetadataSchema`), so it carries these four
+ * fields and nothing else — anything about the CARDS belongs in the catalogue, not on the wire.
+ */
+function cardSourceFor(partitionId, deckId) {
+  return {
+    source: CARD_SOURCE,
+    deckId: typeof deckId === "string" && deckId.length > 0 ? deckId : null,
+    partitionId: partitionId
+  };
 }
 
 /** Is this card a resource, according to the catalogue row resolved for it? */
@@ -485,20 +543,24 @@ function takeResource(byKey, lists) {
 /* ------------------------------------------------------------------------------------------- */
 
 /** Spawn one face-down pile at an area, and return its id (or null when there was nothing). */
-function spawnPile(label, entries, area, faceUrls, seat) {
+function spawnPile(label, entries, area, partitionId, seat, deckId) {
   if (entries.length === 0) {
     return null;
   }
   var id = mintId("pile", seat);
   var metadata = {
     cards: entries,
-    // Provenance, so the gate can tell whose deck this is across a reload.
+    // WHERE the ids resolve. The platform reads this and does the rest — the mod's own card
+    // back, one packed sheet, and the per-card rotation a mixed-orientation game needs.
+    //
+    // ⚠ It replaced a `faceUrls` map of art URLs, which worked and looked wrong: that path
+    // renders each URL as a whole texture at a fixed `rotationQuarter: 0`, so every landscape
+    // card was stretched onto portrait stock, and it carries no back at all.
+    cardSource: cardSourceFor(partitionId, deckId),
+    // The gate's own provenance, so it can tell whose deck this is across a reload.
     swtcgDeckGate: true,
     swtcgSeat: seat
   };
-  if (faceUrls && Object.keys(faceUrls).length > 0) {
-    metadata.faceUrls = faceUrls;
-  }
   api.createObject({
     id: id,
     kind: "deck",
@@ -519,7 +581,7 @@ function spawnPile(label, entries, area, faceUrls, seat) {
  * Returns a sentence for the dialog. Every branch returns one — a placement that silently does
  * nothing is the failure this whole script exists to remove.
  */
-async function placeDeck(seat, name, mainLines, supplyLines, resourceLines) {
+async function placeDeck(seat, name, mainLines, supplyLines, resourceLines, deckId) {
   var main = expandCards(mainLines);
   var supply = expandCards(supplyLines);
   var resources = expandCards(resourceLines);
@@ -528,10 +590,29 @@ async function placeDeck(seat, name, mainLines, supplyLines, resourceLines) {
     return "That deck is empty.";
   }
 
-  // One catalogue pass for every card in every list: the art map and the resource search read the
-  // same rows, and asking twice would resolve the same file twice.
+  // One catalogue pass for every card in every list: the id rewrite and the resource search read
+  // the same rows, and asking twice would resolve the same file twice.
   var byKey = await resolveRows(main.concat(supply).concat(resources));
-  var faceUrls = faceUrlsFrom(byKey);
+
+  // Everything downstream addresses cards by the catalogue's own key.
+  var canonicalMain = canonicaliseEntries(main, byKey);
+  var canonicalSupply = canonicaliseEntries(supply, byKey);
+  var canonicalResources = canonicaliseEntries(resources, byKey);
+  main = canonicalMain.entries;
+  supply = canonicalSupply.entries;
+  resources = canonicalResources.entries;
+  var unresolved = canonicalMain.unresolved + canonicalSupply.unresolved + canonicalResources.unresolved;
+
+  // The rows are re-keyed too, so the resource search below looks cards up by the same id the
+  // piles now carry.
+  var byCanonical = {};
+  var rowKeys = Object.keys(byKey);
+  for (var k = 0; k < rowKeys.length; k += 1) {
+    var row = byKey[rowKeys[k]];
+    var canonicalKey = typeof row.card_id === "string" && row.card_id.length > 0 ? row.card_id : rowKeys[k];
+    byCanonical[canonicalKey] = row;
+  }
+  byKey = byCanonical;
 
   // The resource comes out BEFORE the piles are built, so the card turned up in the resource zone
   // is not also sitting in the deck.
@@ -544,14 +625,14 @@ async function placeDeck(seat, name, mainLines, supplyLines, resourceLines) {
   var areas = await areasForSeat(seat);
   shuffleEntries(main);
 
-  var deckId = spawnPile(name, main, areas.deck, faceUrls, seat);
-  if (deckId) {
+  var pileId = spawnPile(name, main, areas.deck, PARTITION_MAIN, seat, deckId);
+  if (pileId) {
     // The local shuffle above fixes the order the pile is CREATED with; this is the host's own
     // authoritative shuffle, which is the one players see happen and the event log records.
-    api.objectAction(deckId, "shuffle");
+    api.objectAction(pileId, "shuffle");
   }
   if (supply.length > 0) {
-    spawnPile(name + " — Supply", supply, areas.supply, faceUrls, seat);
+    spawnPile(name + " — Supply", supply, areas.supply, PARTITION_SUPPLY, seat, deckId);
   }
 
   if (resource) {
@@ -565,14 +646,19 @@ async function placeDeck(seat, name, mainLines, supplyLines, resourceLines) {
       label: resourceKey,
       displayName: typeof row.name === "string" && row.name.length > 0 ? row.name : resourceKey,
       position: areas.resource.position,
-      rotation: { x: 0, y: areas.resource.rotationY, z: 0 },
+      // Turned on its side. A Resource is printed landscape and the platform keeps a rotated card
+      // on portrait stock with sideways art, so the card itself has to lie the other way to read
+      // upright in its zone. See RESOURCE_TURN_DEGREES.
+      rotation: { x: 0, y: areas.resource.rotationY + RESOURCE_TURN_DEGREES, z: 0 },
       // A resource in play is public information, so it starts face up. The two PILES do not.
       faceDown: false,
       metadata: {
         cardId: resourceKey,
+        // Its own provenance, so it resolves its own face rather than depending on the pile it
+        // came out of — which it is no longer part of.
+        cardSource: cardSourceFor(PARTITION_RESOURCE, deckId),
         swtcgDeckGate: true,
-        swtcgSeat: seat,
-        faceUrls: faceUrls
+        swtcgSeat: seat
       }
     });
   }
@@ -584,6 +670,11 @@ async function placeDeck(seat, name, mainLines, supplyLines, resourceLines) {
     said += ", " + supply.length + " supply";
   }
   said += resource ? ", and a resource." : ", but no resource card was found in it.";
+  if (unresolved > 0) {
+    // Named rather than swallowed: a card this game's catalogue does not know renders blank, and
+    // a blank card with no explanation reads as broken art rather than as a stale decklist.
+    said += " " + unresolved + " card(s) are not in this game's catalogue and will be blank.";
+  }
   if (areas.missing.length > 0) {
     // Named, not swallowed. A pile on the fallback shelf with no explanation reads as a bug in the
     // mod rather than as a scene that has not been set up.
@@ -641,13 +732,54 @@ async function renderNagButton(waiting) {
   await put({
     id: NAG_ID,
     type: "button",
-    presentation: { mode: "screen", anchor: "upper-right", offsetX: 16, offsetY: 16 },
+    // Bottom centre, not the upper right: that corner holds the save indicator and the
+    // host/connection pills, and this button landed underneath them. The toolbar owns the
+    // upper centre, the player card the lower left and the view controls the lower right, which
+    // leaves exactly one uncluttered place for a call to action.
+    presentation: { mode: "screen", anchor: "bottom-center", offsetX: 0, offsetY: -24 },
     props: {
       text: waiting ? "Choose your deck to start" : "Load another deck",
       variant: waiting ? "primary" : "secondary",
       onClick: "swtcgOpen"
     }
   });
+}
+
+/**
+ * This peer's seat, read at the MOMENT OF USE.
+ *
+ * 🔴 `api.getMySeat()` reads context the host pushes into the frame, and that push can land
+ * after the script has booted — a resume seats nobody, so no `onSeatChanged` fires and a seat
+ * held since before the mod loaded arrives late or not at all. Reading it once at boot and
+ * caching the answer turned "not yet" into "never", and every seat-dependent branch below then
+ * reported that the player was not sitting down.
+ *
+ * Cheap enough to call on every render: it is a synchronous read of a local object.
+ */
+function mySeatNow() {
+  try {
+    return api.getMySeat() || null;
+  } catch (error) {
+    return null;
+  }
+}
+
+/**
+ * Refresh a dialog's seat from the live context, and report the decks it needs.
+ *
+ * A dialog opened before the seat was known keeps `seat: null` forever otherwise — the modal
+ * would sit there saying "take a seat first" at somebody who is sitting down.
+ */
+function refreshPickerSeat(picker) {
+  if (picker.seat || picker.peerId !== SELF) {
+    return false;
+  }
+  var seat = mySeatNow();
+  if (!seat) {
+    return false;
+  }
+  picker.seat = seat;
+  return true;
 }
 
 /** Re-state the nag for one seat, once its deck status is known. */
@@ -684,9 +816,8 @@ async function ensureCatalogue() {
     // The failure enum is deliberately coarse — `unavailable | rate-limited | not-found | refused`
     // — so a plugin cannot probe its own budget. Say what the player can act on, not more.
     var reason = result && result.reason ? result.reason : "unavailable";
-    catalogueError = reason === "rate-limited"
-      ? "The deck database is busy. Try again shortly."
-      : "Could not reach the deck database. You can still paste a deck link.";
+    catalogueError = describePluginFailure(reason, "The deck database is busy. Try again shortly.")
+      + " You can still paste a deck link.";
     return;
   }
 
@@ -707,6 +838,30 @@ async function ensureCatalogue() {
     });
   }
   catalogue = rows;
+}
+
+/**
+ * Turn a plugin failure into a sentence the player can act on.
+ *
+ * The enum is deliberately coarse — `unavailable | rate-limited | not-found | refused` — so a
+ * plugin cannot probe its own budget. But two of the four are not outages at all and were being
+ * reported as one: `not-found` means this TABLE has not enabled the plugin (a registered plugin
+ * is inert until a room selects it), and `refused` means the platform declined the call. Telling
+ * somebody "could not reach the deck database" when the real answer is "switch it on in this
+ * room's settings" sends them to look at the wrong thing entirely.
+ */
+function describePluginFailure(reason, whenBusy) {
+  if (reason === "rate-limited") {
+    return whenBusy;
+  }
+  if (reason === "not-found") {
+    return "This table does not have the swtcg-deckdb plugin enabled. Turn it on in the room's"
+      + " settings, or use My decks / Community decks instead.";
+  }
+  if (reason === "refused") {
+    return "The deck database plugin is installed but was refused for this table.";
+  }
+  return "Could not reach the deck database right now.";
 }
 
 /** The deck-db rows one picker's filters select, in catalogue order. */
@@ -737,17 +892,20 @@ async function importDeckDb(seat, deckId) {
 
   if (!result || result.ok !== true) {
     var reason = result && result.reason ? result.reason : "unavailable";
+    // ⚠ `not-found` is ambiguous HERE in a way it is not on the browse call: it means either "no
+    // such deck" or "this table has not enabled the plugin". Both are worth saying, because a
+    // player who pasted a good link and a player on a table with no plugin would otherwise get
+    // the same flatly wrong sentence.
     if (reason === "not-found") {
-      return "No public deck with id " + deckId + ".";
+      return "No public deck with id " + deckId + " — or this table does not have the"
+        + " swtcg-deckdb plugin enabled.";
     }
-    if (reason === "rate-limited") {
-      return "The deck database is busy. Try again shortly.";
-    }
-    return "Could not reach the deck database.";
+    return describePluginFailure(reason, "The deck database is busy. Try again shortly.");
   }
 
   var deck = result.data || {};
-  return await placeDeck(seat, text(deck.name) || "Imported deck", deck.cards, deck.supply, null);
+  // A deck-db list has no DiceyTable deck row, so there is no id to attribute it to.
+  return await placeDeck(seat, text(deck.name) || "Imported deck", deck.cards, deck.supply, null, null);
 }
 
 /* ------------------------------------------------------------------------------------------- */
@@ -830,7 +988,7 @@ async function sendMyDeck(deckId) {
   if (canDraw) {
     // The host loading its OWN deck takes the same path a remote one does, so there is one
     // placement routine rather than two that can disagree.
-    applyChosenDeck(api.getMySeat(), SELF, payload);
+    applyChosenDeck(mySeatNow(), SELF, payload);
     return;
   }
   await api.sendToHost(MSG_LOAD, payload);
@@ -952,6 +1110,8 @@ async function renderPicker(picker) {
   if (!canDraw || !pickers[picker.token]) {
     return;
   }
+  // The seat may have arrived since this dialog opened; see `mySeatNow`.
+  refreshPickerSeat(picker);
   var id = picker.root;
 
   await put({
@@ -1392,6 +1552,7 @@ async function runLoad(picker, task) {
   if (picker.busy) {
     return;
   }
+  refreshPickerSeat(picker);
   if (!picker.seat) {
     picker.status = "Take a seat first — a deck belongs to a seat.";
     await renderPicker(picker);
@@ -1507,7 +1668,14 @@ function applyChosenDeck(seat, pickerKey, payload) {
   }
 
   void (async function () {
-    var said = await placeDeck(seat, text(payload.name) || "Deck", main, supply, resources);
+    var said = await placeDeck(
+      seat,
+      text(payload.name) || "Deck",
+      main,
+      supply,
+      resources,
+      typeof payload.deckId === "string" ? payload.deckId : null
+    );
     settle(said);
     await refreshNag(seat);
   })();
@@ -1751,13 +1919,14 @@ api.on("swtcgOpen", function (payload) {
   if (!payload || typeof payload.actorPeerId !== "string") {
     return;
   }
-  // PLAYER half: reopening is also a cue to refresh what the host has of my shelf. The nag
-  // button belongs to no dialog, so isActorPeer cannot place it on the host — which is fine,
-  // because the host's own entry was filled at boot and is refreshed on every tab switch.
-  if (!canDraw) {
-    void reportMyDecks("mine", "");
-    void reportMyDecks("public", "");
-  }
+  // Reopening is a cue to refresh this peer's own shelf, on EVERY peer.
+  //
+  // It used to be guarded on `!canDraw`, on the reasoning that the host's entry was filled at
+  // boot. That reasoning failed exactly when it mattered: boot only reports when it already knows
+  // a seat, so a host whose seat context had not arrived reported nothing at boot and nothing
+  // here either, and its own dialog said "Looking for your decks…" for ever.
+  void reportMyDecks("mine", "");
+  void reportMyDecks("public", "");
 
   // HOST half. `force`, because this button is somebody asking: a player who wants a second deck
   // should get the dialog rather than a silent no-op.
@@ -1768,8 +1937,9 @@ api.on("swtcgOpen", function (payload) {
   // a peer whose seat this script never recorded is the host's own.
   var actorSeat = seatByPeer[payload.actorPeerId] || null;
   var key = payload.actorPeerId;
-  if (!actorSeat && api.getMySeat()) {
-    actorSeat = api.getMySeat();
+  var localSeat = mySeatNow();
+  if (!actorSeat && localSeat) {
+    actorSeat = localSeat;
     key = SELF;
   }
   void openPicker(
@@ -1827,7 +1997,7 @@ api.on("onSeatChanged", function (payload) {
   // PLAYER half. `api.getMySeat()` is this peer's own seat, and a seat holds one person — so a
   // seat change naming MY seat is me sitting down. Report my shelf now, so the host has rows to
   // draw the moment it opens the dialog rather than an empty list and a spinner.
-  if (payload.seat === api.getMySeat()) {
+  if (payload.seat === mySeatNow()) {
     void reportMyDecks("mine", "");
     void reportMyDecks("public", "");
   }
@@ -1853,16 +2023,16 @@ api.on("onSeatChanged", function (payload) {
  * nag button and nothing more, which is right: a host who is spectating has no deck to draw.
  */
 async function boot() {
-  var seat = api.getMySeat();
+  var seat = mySeatNow();
   await renderNagButton(seat ? !(await seatHasDeck(seat)) : true);
 
-  // Every peer reports its own shelf at boot, host included. Deliberately AFTER the nag button:
-  // that first `put` is what settles `canDraw`, and `reportMyDecks` branches on it to decide
-  // whether to store locally or send up.
-  if (seat) {
-    void reportMyDecks("mine", "");
-    void reportMyDecks("public", "");
-  }
+  // Every peer reports its own shelf at boot, host included, and WITHOUT waiting to know a seat:
+  // a shelf is worth reading either way, and gating it on the seat is what left a host whose seat
+  // context had not yet arrived with an empty dialog it could never fill. Deliberately after the
+  // nag button, because that first `put` is what settles `canDraw`, and `reportMyDecks` branches
+  // on it to decide whether to store locally or send up.
+  void reportMyDecks("mine", "");
+  void reportMyDecks("public", "");
 
   if (!canDraw || !seat) {
     return;
