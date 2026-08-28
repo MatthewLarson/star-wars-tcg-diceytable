@@ -416,7 +416,7 @@
         "y": 0.125
       },
       "stacking": "number",
-      "max": 1,
+      "max": 9999,
       "visibility": "hidden",
       "face": "front",
       "flip": "discharge",
@@ -436,7 +436,7 @@
         "y": 0.125
       },
       "stacking": "number",
-      "max": 1,
+      "max": 9999,
       "visibility": "full",
       "face": "back",
       "flip": "persist",
@@ -456,7 +456,7 @@
         "y": 0.125
       },
       "stacking": "number",
-      "max": 1,
+      "max": 9999,
       "visibility": "hidden",
       "face": "front",
       "flip": "discharge",
@@ -476,7 +476,7 @@
         "y": 0.125
       },
       "stacking": "number",
-      "max": 1,
+      "max": 9999,
       "visibility": "hidden",
       "face": "front",
       "flip": "discharge",
@@ -490,7 +490,11 @@
         "path": "assets/textures/counter-subtype-misc.webp"
       },
       "label": "SM",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -506,7 +510,11 @@
         "path": "assets/textures/counter-subtype-light.webp"
       },
       "label": "SL",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -522,7 +530,11 @@
         "path": "assets/textures/counter-subtype-dark.webp"
       },
       "label": "SD",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -538,7 +550,11 @@
         "path": "assets/textures/counter-static.webp"
       },
       "label": "St",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -554,7 +570,11 @@
         "path": "assets/textures/counter-resource.webp"
       },
       "label": "Re",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -570,7 +590,11 @@
         "path": "assets/textures/counter-misc-yellow.webp"
       },
       "label": "MY",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -586,7 +610,11 @@
         "path": "assets/textures/counter-misc-turquoise.webp"
       },
       "label": "MT",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -602,7 +630,11 @@
         "path": "assets/textures/counter-misc-purple.webp"
       },
       "label": "MP",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -618,7 +650,11 @@
         "path": "assets/textures/counter-mastery.webp"
       },
       "label": "Ma",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -634,7 +670,11 @@
         "path": "assets/textures/counter-granted-pilot-ability.webp"
       },
       "label": "Pi",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -650,7 +690,11 @@
         "path": "assets/textures/counter-granted-activated-ability.webp"
       },
       "label": "Ac",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -666,7 +710,11 @@
         "path": "assets/textures/counter-force.webp"
       },
       "label": "F",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -682,7 +730,11 @@
         "path": "assets/textures/counter-credit.webp"
       },
       "label": "Cr",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -698,7 +750,11 @@
         "path": "assets/textures/counter-corruption.webp"
       },
       "label": "Co",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -714,7 +770,11 @@
         "path": "assets/textures/counter-1.webp"
       },
       "label": "1",
-      "anchor": "bottom-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -730,7 +790,11 @@
         "path": "assets/textures/counter-2.webp"
       },
       "label": "2",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -746,7 +810,11 @@
         "path": "assets/textures/counter-3.webp"
       },
       "label": "3",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -762,7 +830,11 @@
         "path": "assets/textures/counter-4.webp"
       },
       "label": "4",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -778,7 +850,11 @@
         "path": "assets/textures/counter-5.webp"
       },
       "label": "5",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
@@ -794,7 +870,11 @@
         "path": "assets/textures/counter-6.webp"
       },
       "label": "6",
-      "anchor": "top-left",
+      "anchor": "center",
+      "offset": {
+        "x": 0.125,
+        "y": 0.125
+      },
       "stacking": "number",
       "max": 9999,
       "visibility": "hidden",
