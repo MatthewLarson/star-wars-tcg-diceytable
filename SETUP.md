@@ -96,6 +96,27 @@ An earlier version attached a `faceUrls` map of art URLs instead. It worked and 
 that path renders each URL as a whole texture at a fixed rotation, so every landscape card was
 stretched onto portrait stock, and it carries no card back at all.
 
+### Why it may land square anyway
+
+A Resource is printed **landscape**, so the script spawns it turned 90°. Whether it *stays*
+turned is the zone's decision, not the script's.
+
+The platform keeps every card on **portrait stock** at the table and ignores `rotationQuarter`
+there deliberately — a landscape outline would advertise a face-down card's type, which in this
+game is real information. A card you want sideways is one you turn yourself.
+
+And an `area` zone that auto-arranges owns the orientation of everything inside it:
+`arrangeAreaZone` re-lays the zone on every membership change and sets each piece's yaw to the
+**seat's facing**. The shipped seat template authors all three zones with `arrange: "stack"`, so
+the resource is turned back within a frame of being placed, with nothing logged.
+
+Measured on a live table (2026-08-28): the card was spawned at 270° and read back at 180°, the
+same yaw as the deck and supply piles.
+
+**To have the turn stick, set the Resource zone's arrange mode to `none` in Edit Mode.** That
+zone holds one card, so it has nothing to arrange — and its authored footprint is already
+landscape (0.365 × 0.276, wider than deep), which is the shape a turned card wants.
+
 ## Checking a change
 
 ```bash
