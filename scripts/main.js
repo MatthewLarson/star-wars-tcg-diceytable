@@ -105,6 +105,27 @@ var PAGE_SIZE = 8;
 /** The catalogue `type` value that counts as a resource. */
 var RESOURCE_TYPE = "resource";
 
+/**
+ * This game's card source, as `data/cardSchema.json` defines it.
+ *
+ * `version` is the schema's BREAKING version, not the mod's release version: it is the deck
+ * pool's identity, and it changes only when the card model changes incompatibly.
+ */
+var CARD_SOURCE = { kind: "mod", id: "star-wars-tcg", version: 1 };
+
+/**
+ * How far the resource card is turned in its zone, in degrees.
+ *
+ * Star Wars TCG prints Resource cards LANDSCAPE, and the platform deliberately keeps a rotated
+ * card on ordinary portrait stock with its art sideways — `normalizeRotatedCardBodies` actively
+ * puts a landscape body back. So the card that has to turn is the physical one, and turning it is
+ * this game's call rather than the platform's: a resource laid in its zone reads upright only if
+ * the card itself is on its side.
+ *
+ * Flip the sign if it comes out upside down; nothing else depends on which way it goes.
+ */
+var RESOURCE_TURN_DEGREES = 90;
+
 /** Partition ids this game's `data/cardSchema.json` declares. */
 var PARTITION_MAIN = "main";
 var PARTITION_SUPPLY = "supply";
@@ -436,17 +457,54 @@ async function resolveRows(entries) {
   return byKey;
 }
 
-/** The `art` URL for each resolved card, ready to become `metadata.faceUrls`. */
-function faceUrlsFrom(byKey) {
-  var faceUrls = {};
-  var keys = Object.keys(byKey);
-  for (var i = 0; i < keys.length; i += 1) {
-    var art = byKey[keys[i]].art;
-    if (typeof art === "string" && art.length > 0) {
-      faceUrls[keys[i]] = art;
+/**
+ * Rewrite every entry's id to the catalogue's OWN key, and report what did not resolve.
+ *
+ * 🔴 **This is what lets the platform render the cards properly.** A pile carrying
+ * `metadata.cardSource` has its art resolved by the platform against this mod's catalogue — which
+ * gives it the mod's own card back, one packed sheet per pile, and the mixed-orientation handling
+ * this game needs (landscape Battle/Mission/Equipment/Location/Resource/Event alongside portrait
+ * Character/Ground/Space). That resolution matches on the catalogue KEY and nothing else.
+ *
+ * The two deck sources do not agree on what an entry names: a DiceyTable deck stores `card_id`,
+ * and the deck-db plugin hands back NAMES. `api.resolveCards` accepts either — it falls back to a
+ * name match — and every row it returns carries its own `card_id`, so this is where the two are
+ * made one.
+ *
+ * An entry that resolves to nothing keeps the id it came with. It will render blank rather than
+ * render as the wrong card, and the count is reported so the player is told.
+ */
+function canonicaliseEntries(entries, byKey) {
+  var unresolved = 0;
+  var out = [];
+  for (var i = 0; i < entries.length; i += 1) {
+    var entry = entries[i];
+    var key = baseKey(entry.cardId);
+    var suffix = text(entry.cardId).slice(key.length);
+    var row = byKey[key];
+    var canonical = row && typeof row.card_id === "string" && row.card_id.length > 0
+      ? row.card_id
+      : null;
+    if (!canonical) {
+      unresolved += 1;
     }
+    out.push({ cardId: (canonical || key) + suffix, faceDown: entry.faceDown });
   }
-  return faceUrls;
+  return { entries: out, unresolved: unresolved };
+}
+
+/**
+ * The provenance slice that tells the platform where a pile's ids resolve.
+ *
+ * Strictly validated on the way in (`catalogueDeckMetadataSchema`), so it carries these four
+ * fields and nothing else — anything about the CARDS belongs in the catalogue, not on the wire.
+ */
+function cardSourceFor(partitionId, deckId) {
+  return {
+    source: CARD_SOURCE,
+    deckId: typeof deckId === "string" && deckId.length > 0 ? deckId : null,
+    partitionId: partitionId
+  };
 }
 
 /** Is this card a resource, according to the catalogue row resolved for it? */
@@ -485,20 +543,24 @@ function takeResource(byKey, lists) {
 /* ------------------------------------------------------------------------------------------- */
 
 /** Spawn one face-down pile at an area, and return its id (or null when there was nothing). */
-function spawnPile(label, entries, area, faceUrls, seat) {
+function spawnPile(label, entries, area, partitionId, seat, deckId) {
   if (entries.length === 0) {
     return null;
   }
   var id = mintId("pile", seat);
   var metadata = {
     cards: entries,
-    // Provenance, so the gate can tell whose deck this is across a reload.
+    // WHERE the ids resolve. The platform reads this and does the rest — the mod's own card
+    // back, one packed sheet, and the per-card rotation a mixed-orientation game needs.
+    //
+    // ⚠ It replaced a `faceUrls` map of art URLs, which worked and looked wrong: that path
+    // renders each URL as a whole texture at a fixed `rotationQuarter: 0`, so every landscape
+    // card was stretched onto portrait stock, and it carries no back at all.
+    cardSource: cardSourceFor(partitionId, deckId),
+    // The gate's own provenance, so it can tell whose deck this is across a reload.
     swtcgDeckGate: true,
     swtcgSeat: seat
   };
-  if (faceUrls && Object.keys(faceUrls).length > 0) {
-    metadata.faceUrls = faceUrls;
-  }
   api.createObject({
     id: id,
     kind: "deck",
@@ -519,7 +581,7 @@ function spawnPile(label, entries, area, faceUrls, seat) {
  * Returns a sentence for the dialog. Every branch returns one — a placement that silently does
  * nothing is the failure this whole script exists to remove.
  */
-async function placeDeck(seat, name, mainLines, supplyLines, resourceLines) {
+async function placeDeck(seat, name, mainLines, supplyLines, resourceLines, deckId) {
   var main = expandCards(mainLines);
   var supply = expandCards(supplyLines);
   var resources = expandCards(resourceLines);
@@ -528,10 +590,29 @@ async function placeDeck(seat, name, mainLines, supplyLines, resourceLines) {
     return "That deck is empty.";
   }
 
-  // One catalogue pass for every card in every list: the art map and the resource search read the
-  // same rows, and asking twice would resolve the same file twice.
+  // One catalogue pass for every card in every list: the id rewrite and the resource search read
+  // the same rows, and asking twice would resolve the same file twice.
   var byKey = await resolveRows(main.concat(supply).concat(resources));
-  var faceUrls = faceUrlsFrom(byKey);
+
+  // Everything downstream addresses cards by the catalogue's own key.
+  var canonicalMain = canonicaliseEntries(main, byKey);
+  var canonicalSupply = canonicaliseEntries(supply, byKey);
+  var canonicalResources = canonicaliseEntries(resources, byKey);
+  main = canonicalMain.entries;
+  supply = canonicalSupply.entries;
+  resources = canonicalResources.entries;
+  var unresolved = canonicalMain.unresolved + canonicalSupply.unresolved + canonicalResources.unresolved;
+
+  // The rows are re-keyed too, so the resource search below looks cards up by the same id the
+  // piles now carry.
+  var byCanonical = {};
+  var rowKeys = Object.keys(byKey);
+  for (var k = 0; k < rowKeys.length; k += 1) {
+    var row = byKey[rowKeys[k]];
+    var canonicalKey = typeof row.card_id === "string" && row.card_id.length > 0 ? row.card_id : rowKeys[k];
+    byCanonical[canonicalKey] = row;
+  }
+  byKey = byCanonical;
 
   // The resource comes out BEFORE the piles are built, so the card turned up in the resource zone
   // is not also sitting in the deck.
@@ -544,14 +625,14 @@ async function placeDeck(seat, name, mainLines, supplyLines, resourceLines) {
   var areas = await areasForSeat(seat);
   shuffleEntries(main);
 
-  var deckId = spawnPile(name, main, areas.deck, faceUrls, seat);
-  if (deckId) {
+  var pileId = spawnPile(name, main, areas.deck, PARTITION_MAIN, seat, deckId);
+  if (pileId) {
     // The local shuffle above fixes the order the pile is CREATED with; this is the host's own
     // authoritative shuffle, which is the one players see happen and the event log records.
-    api.objectAction(deckId, "shuffle");
+    api.objectAction(pileId, "shuffle");
   }
   if (supply.length > 0) {
-    spawnPile(name + " — Supply", supply, areas.supply, faceUrls, seat);
+    spawnPile(name + " — Supply", supply, areas.supply, PARTITION_SUPPLY, seat, deckId);
   }
 
   if (resource) {
@@ -565,14 +646,19 @@ async function placeDeck(seat, name, mainLines, supplyLines, resourceLines) {
       label: resourceKey,
       displayName: typeof row.name === "string" && row.name.length > 0 ? row.name : resourceKey,
       position: areas.resource.position,
-      rotation: { x: 0, y: areas.resource.rotationY, z: 0 },
+      // Turned on its side. A Resource is printed landscape and the platform keeps a rotated card
+      // on portrait stock with sideways art, so the card itself has to lie the other way to read
+      // upright in its zone. See RESOURCE_TURN_DEGREES.
+      rotation: { x: 0, y: areas.resource.rotationY + RESOURCE_TURN_DEGREES, z: 0 },
       // A resource in play is public information, so it starts face up. The two PILES do not.
       faceDown: false,
       metadata: {
         cardId: resourceKey,
+        // Its own provenance, so it resolves its own face rather than depending on the pile it
+        // came out of — which it is no longer part of.
+        cardSource: cardSourceFor(PARTITION_RESOURCE, deckId),
         swtcgDeckGate: true,
-        swtcgSeat: seat,
-        faceUrls: faceUrls
+        swtcgSeat: seat
       }
     });
   }
@@ -584,6 +670,11 @@ async function placeDeck(seat, name, mainLines, supplyLines, resourceLines) {
     said += ", " + supply.length + " supply";
   }
   said += resource ? ", and a resource." : ", but no resource card was found in it.";
+  if (unresolved > 0) {
+    // Named rather than swallowed: a card this game's catalogue does not know renders blank, and
+    // a blank card with no explanation reads as broken art rather than as a stale decklist.
+    said += " " + unresolved + " card(s) are not in this game's catalogue and will be blank.";
+  }
   if (areas.missing.length > 0) {
     // Named, not swallowed. A pile on the fallback shelf with no explanation reads as a bug in the
     // mod rather than as a scene that has not been set up.
@@ -813,7 +904,8 @@ async function importDeckDb(seat, deckId) {
   }
 
   var deck = result.data || {};
-  return await placeDeck(seat, text(deck.name) || "Imported deck", deck.cards, deck.supply, null);
+  // A deck-db list has no DiceyTable deck row, so there is no id to attribute it to.
+  return await placeDeck(seat, text(deck.name) || "Imported deck", deck.cards, deck.supply, null, null);
 }
 
 /* ------------------------------------------------------------------------------------------- */
@@ -1576,7 +1668,14 @@ function applyChosenDeck(seat, pickerKey, payload) {
   }
 
   void (async function () {
-    var said = await placeDeck(seat, text(payload.name) || "Deck", main, supply, resources);
+    var said = await placeDeck(
+      seat,
+      text(payload.name) || "Deck",
+      main,
+      supply,
+      resources,
+      typeof payload.deckId === "string" ? payload.deckId : null
+    );
     settle(said);
     await refreshNag(seat);
   })();

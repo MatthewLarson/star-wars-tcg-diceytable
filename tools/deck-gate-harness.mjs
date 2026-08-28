@@ -15,12 +15,26 @@ const SRC = readFileSync(new URL("../scripts/main.js", import.meta.url), "utf8")
 
 /** The mod's own catalogue rows the script resolves against. */
 const CATALOGUE = {
-  "Anakin Skywalker": { name: "Anakin Skywalker", type: "Character", art: "https://x/a.png" },
-  Coruscant: { name: "Coruscant", type: "Location", art: "https://x/c.png" },
-  "Tatooine Resource": { name: "Tatooine Resource", type: "Resource", art: "https://x/r.png" },
-  "Supply Resource": { name: "Supply Resource", type: "Resource", art: "https://x/s.png" },
-  Blaster: { name: "Blaster", type: "Equipment", art: "https://x/b.png" }
+  "Anakin Skywalker": { card_id: "SW001_Anakin", name: "Anakin Skywalker", type: "Character", art: "https://x/a.png" },
+  Coruscant: { card_id: "SW002_Coruscant", name: "Coruscant", type: "Location", art: "https://x/c.png" },
+  "Tatooine Resource": { card_id: "SW003_Tatooine", name: "Tatooine Resource", type: "Resource", art: "https://x/r.png" },
+  "Supply Resource": { card_id: "SW004_SupplyRes", name: "Supply Resource", type: "Resource", art: "https://x/s.png" },
+  Blaster: { card_id: "SW005_Blaster", name: "Blaster", type: "Equipment", art: "https://x/b.png" }
 };
+
+/** Resolve by catalogue key OR by name, exactly as `api.resolveCards` does. */
+function catalogueRow(id) {
+  if (CATALOGUE[id]) {
+    return CATALOGUE[id];
+  }
+  const names = Object.keys(CATALOGUE);
+  for (const name of names) {
+    if (CATALOGUE[name].card_id === id) {
+      return CATALOGUE[name];
+    }
+  }
+  return null;
+}
 
 function zone(seat, name, x, z, rotationY) {
   return {
@@ -82,7 +96,9 @@ function makePeer(name, options) {
     },
     listObjects: async () => table.objects.filter((o) => o.kind === "deck"),
     listSeatZones: async (seat) => ZONES.filter((z) => !seat || z.seat === seat),
-    resolveCards: async (ids) => ids.filter((id) => CATALOGUE[id]).map((id) => ({ cardId: id, data: CATALOGUE[id] })),
+    resolveCards: async (ids) => ids
+      .map((id) => ({ cardId: id, data: catalogueRow(id) }))
+      .filter((row) => !!row.data),
     // THE POINT: each peer reads its OWN library.
     listDecks: async (q) => (options.decks ?? []).filter((d) => q.scope === "mine" || d.visibility === "public"),
     getDeck: async (id) => (options.deckRecords ?? {})[id] ?? null,
@@ -301,14 +317,43 @@ console.log("\n4. a player picks; the player reads; the host places");
   check("the resource went to BLUE's resource zone", cards[0]?.position.x === -1.83, cards[0]?.position);
   check("piles are face down", main?.faceDown === true && supply?.faceDown === true);
   check("the resource is face up", cards[0]?.faceDown === false);
-  check("the resource is the Resource-typed card", cards[0]?.label === "Tatooine Resource", cards[0]?.label);
+  check("the resource is the Resource-typed card", cards[0]?.label === "SW003_Tatooine", cards[0]?.label);
   check("the resource is not also in the deck",
-    !main.metadata.cards.some((c) => c.cardId.startsWith("Tatooine")),
+    !main.metadata.cards.some((c) => c.cardId.startsWith("SW003")),
     main.metadata.cards.map((c) => c.cardId));
   check("main holds 3 cards", main?.stackCount === 3, main?.stackCount);
   check("the host shuffled it", host.calls.actions.some((a) => a.action === "shuffle"), host.calls.actions);
   check("the pile is stamped with the PLAYER's seat", main?.metadata.swtcgSeat === "blue", main?.metadata.swtcgSeat);
-  check("art rides along", !!main?.metadata.faceUrls["Anakin Skywalker"]);
+  // 🔴 What replaced the art map. A pile carrying provenance has its faces resolved by the
+  // PLATFORM against this game's catalogue, which is what supplies the mod's own card back and
+  // the per-card rotation a mixed-orientation game needs. The old `faceUrls` map rendered every
+  // URL as a whole texture at rotation 0 — landscape art stretched onto portrait stock — and
+  // carried no back at all.
+  check("the pile carries card-source provenance", !!main?.metadata.cardSource, main?.metadata);
+  check("naming this game's source",
+    main?.metadata.cardSource?.source?.id === "star-wars-tcg" && main?.metadata.cardSource?.source?.version === 1,
+    main?.metadata.cardSource?.source);
+  check("and its partition", main?.metadata.cardSource?.partitionId === "main", main?.metadata.cardSource);
+  check("supply names ITS partition", supply?.metadata.cardSource?.partitionId === "supply",
+    supply?.metadata.cardSource);
+  check("no faceUrls map is sent any more", main?.metadata.faceUrls === undefined, main?.metadata.faceUrls);
+
+  // Ids are rewritten to the catalogue's own key, or the platform resolves nothing.
+  check("card ids are the catalogue's, not the decklist's",
+    main.metadata.cards.every((c) => c.cardId.startsWith("SW00")),
+    main.metadata.cards.map((c) => c.cardId));
+  check("and physical copies keep their suffix",
+    main.metadata.cards.some((c) => /#2$/.test(c.cardId)),
+    main.metadata.cards.map((c) => c.cardId));
+
+  // A Resource is printed landscape, and the platform keeps rotated art on portrait stock — so
+  // the card itself is what turns.
+  check("the resource card is turned on its side",
+    Math.abs(((cards[0]?.rotation.y ?? 0) - 0 + 360) % 180) === 90,
+    cards[0]?.rotation);
+  check("the resource resolves its own face", cards[0]?.metadata.cardSource?.partitionId === "resource",
+    cards[0]?.metadata.cardSource);
+  check("and is labelled with the catalogue id", cards[0]?.label === "SW003_Tatooine", cards[0]?.label);
 }
 
 /* ------------------------------------------------------------------ */
@@ -411,6 +456,10 @@ console.log("\n10. the deck database tab still works, host-side");
   const piles = host.calls.created.filter((o) => o.kind === "deck");
   check("it imports", piles.length === 2, piles.map((p) => p.label));
   check("into the red deck zone", piles[0]?.position.x === 1.39, piles[0]?.position);
+  // The plugin hands back NAMES; the platform resolves art by catalogue key. This is the join.
+  check("names are rewritten to catalogue ids",
+    piles[0]?.metadata.cards.every((c) => c.cardId.startsWith("SW00")),
+    piles[0]?.metadata.cards.map((c) => c.cardId));
 }
 
 /* ------------------------------------------------------------------ */
@@ -490,6 +539,88 @@ console.log("\n14. the nag button is out of the status pills' corner");
   // rendered underneath them.
   check("not anchored upper-right", nag?.presentation.anchor !== "upper-right", nag?.presentation);
   check("centered along an empty edge", nag?.presentation.anchor === "bottom-center", nag?.presentation);
+}
+
+/* ------------------------------------------------------------------ */
+console.log("\n15. the resource fallback chain: partition -> main -> supply");
+{
+  // The order is the game's rule, not an implementation detail: a deck that separates its
+  // resources has said which card it wants turned up, so that list is asked first.
+  async function resourceFrom(entries) {
+    const record = deckRecord("chain-uuid", "Chain", entries, "public");
+    const table = makeTable();
+    const host = makePeer("host", {
+      isHost: true, peerId: "peer-host", seat: "red", table,
+      decks: [{ ...record, entries: undefined }], deckRecords: { "chain-uuid": record }
+    });
+    run(host);
+    await tick();
+    const root = dialogRootFor(host, host);
+    await table.click(host, rowsOf(host, root)[0].id);
+    const card = host.calls.created.find((o) => o.kind === "card");
+    const main = host.calls.created.find((o) => o.kind === "deck" && !o.label.includes("Supply"));
+    return { label: card?.label ?? null, logs: host.calls.logs, main };
+  }
+
+  const fromPartition = await resourceFrom([
+    { cardId: "Tatooine Resource", count: 1, partitionId: "resource" },
+    { cardId: "Supply Resource", count: 1, partitionId: "supply" },
+    { cardId: "Coruscant", count: 1, partitionId: "main" }
+  ]);
+  check("prefers the resource partition", fromPartition.label === "SW003_Tatooine", fromPartition.label);
+
+  const fromMain = await resourceFrom([
+    { cardId: "Tatooine Resource", count: 1, partitionId: "main" },
+    { cardId: "Supply Resource", count: 1, partitionId: "supply" }
+  ]);
+  check("falls back to the main deck", fromMain.label === "SW003_Tatooine", fromMain.label);
+
+  const fromSupply = await resourceFrom([
+    { cardId: "Coruscant", count: 1, partitionId: "main" },
+    { cardId: "Supply Resource", count: 1, partitionId: "supply" }
+  ]);
+  check("falls back to the supply", fromSupply.label === "SW004_SupplyRes", fromSupply.label);
+
+  const none = await resourceFrom([{ cardId: "Coruscant", count: 2, partitionId: "main" }]);
+  check("a deck with no resource still loads", none.label === null, none.label);
+  check("and says so", none.logs.some((l) => l.includes("no resource card")), none.logs);
+
+  // Anything left in the resource partition is still part of the deck — it simply was not the
+  // one card turned up.
+  const twoResources = await resourceFrom([
+    { cardId: "Tatooine Resource", count: 1, partitionId: "resource" },
+    { cardId: "Supply Resource", count: 1, partitionId: "resource" },
+    { cardId: "Coruscant", count: 1, partitionId: "main" }
+  ]);
+  check("the spare resource joins the main deck",
+    twoResources.main?.metadata.cards.some((c) => c.cardId.startsWith("SW004")),
+    twoResources.main?.metadata.cards.map((c) => c.cardId));
+}
+
+/* ------------------------------------------------------------------ */
+console.log("\n16. a card this game's catalogue does not know is reported, not hidden");
+{
+  const record = deckRecord("unknown-uuid", "Mystery", [
+    { cardId: "Coruscant", count: 1, partitionId: "main" },
+    { cardId: "Some Card From Another Set", count: 2, partitionId: "main" }
+  ], "public");
+  const table = makeTable();
+  const host = makePeer("host", {
+    isHost: true, peerId: "peer-host", seat: "red", table,
+    decks: [{ ...record, entries: undefined }], deckRecords: { "unknown-uuid": record }
+  });
+  run(host);
+  await tick();
+  await table.click(host, rowsOf(host, dialogRootFor(host, host))[0].id);
+
+  const main = host.calls.created.find((o) => o.kind === "deck");
+  check("the deck still loads", !!main, host.calls.created.map((o) => o.label));
+  // Kept, not dropped: a missing card renders blank, and silently shrinking somebody's deck is
+  // worse than showing them a blank they can ask about.
+  check("the unknown cards are kept", main?.stackCount === 3, main?.stackCount);
+  check("and the player is told",
+    host.calls.logs.some((l) => l.includes("not in this game's catalogue")),
+    host.calls.logs);
 }
 
 console.log(`\n${failures === 0 ? "ALL CHECKS PASSED" : `${failures} CHECK(S) FAILED`}`);
