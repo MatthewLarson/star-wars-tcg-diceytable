@@ -96,26 +96,31 @@ An earlier version attached a `faceUrls` map of art URLs instead. It worked and 
 that path renders each URL as a whole texture at a fixed rotation, so every landscape card was
 stretched onto portrait stock, and it carries no card back at all.
 
-### Why it may land square anyway
+### The zone is what turns, not the card
 
-A Resource is printed **landscape**, so the script spawns it turned 90°. Whether it *stays*
-turned is the zone's decision, not the script's.
+A Resource is printed **landscape**, so it has to lie across. The script does **not** turn it —
+the **Resource zone** carries `rotationY: 90` in the seat template, and the card inherits that.
 
-The platform keeps every card on **portrait stock** at the table and ignores `rotationQuarter`
-there deliberately — a landscape outline would advertise a face-down card's type, which in this
-game is real information. A card you want sideways is one you turn yourself.
+That is not a style choice, it is the only thing that works. An `area` zone with an arrange mode
+re-lays its contents on every membership change and sets each piece's yaw to the **zone's**
+facing, so a card cannot keep an orientation of its own:
 
-And an `area` zone that auto-arranges owns the orientation of everything inside it:
-`arrangeAreaZone` re-lays the zone on every membership change and sets each piece's yaw to the
-**seat's facing**. The shipped seat template authors all three zones with `arrange: "stack"`, so
-the resource is turned back within a frame of being placed, with nothing logged.
+```ts
+const facing = seatFacingYawDegrees(zone.position, zone.rotationY);
+const rotation = faceKeepingEulerAngles(object.entity.up.y, facing);
+```
 
-Measured on a live table (2026-08-28): the card was spawned at 270° and read back at 180°, the
-same yaw as the deck and supply piles.
+An earlier version of this script added 90° at spawn instead. It never once took effect — the
+card was turned back within a frame, with nothing logged. Measured on a live table: spawned at
+270°, read back at 180°, identical to the deck and supply piles.
 
-**To have the turn stick, set the Resource zone's arrange mode to `none` in Edit Mode.** That
-zone holds one card, so it has nothing to arrange — and its authored footprint is already
-landscape (0.365 × 0.276, wider than deep), which is the shape a turned card wants.
+**So: to change how the resource lies, rotate the zone in Edit Mode.** Adding a turn in the
+script as well would double it on any zone with arrange off, and would give you two places to
+look when it came out wrong.
+
+The related platform rule, worth knowing before reaching for `rotationQuarter`: the table keeps
+every card on **portrait stock** and ignores that field there deliberately, because a landscape
+outline would advertise a face-down card's type — which in this game is real information.
 
 ## Checking a change
 

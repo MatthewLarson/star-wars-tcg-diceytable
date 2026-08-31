@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -12,7 +12,6 @@
     "assets/cards/swtcg.cards.json",
     "assets/cover.webp",
     "assets/models/disgruntled-tokens-a7d556.glb",
-    "assets/models/model-1a5848.glb",
     "assets/models/model-f2fbfd.collider.glb",
     "assets/models/model-f2fbfd.glb",
     "assets/models/model-f2fbfd.meta.json",
@@ -93,6 +92,16 @@
         "starterDecks",
         "publicDecks"
       ]
+    }
+  ],
+  "pluginSettings": {
+    "community.swtcg-deckdb": {}
+  },
+  "assetRepos": [
+    {
+      "owner": "SWTCG",
+      "repo": "SWTCG-LACKEY",
+      "ref": "master"
     }
   ]
 }

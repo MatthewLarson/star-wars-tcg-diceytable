@@ -113,28 +113,6 @@ var RESOURCE_TYPE = "resource";
  */
 var CARD_SOURCE = { kind: "mod", id: "star-wars-tcg", version: 1 };
 
-/**
- * How far the resource card is turned in its zone, in degrees.
- *
- * Star Wars TCG prints Resource cards LANDSCAPE, and the platform keeps every card on portrait
- * stock: `rotationQuarter` is ignored at the table ON PURPOSE, because a landscape outline would
- * advertise a face-down card's type. So the card that has to turn is the physical one, and
- * turning it is this game's call rather than the platform's.
- *
- * ⚠ **An auto-arranging zone overrides this, and silently.** `arrangeAreaZone` re-lays an
- * `area` zone whose membership changed and sets each piece's yaw to the SEAT'S FACING — it owns
- * the orientation of everything inside it. A card spawned at any other angle is turned back
- * within a frame, with nothing logged.
- *
- * So this constant takes effect only when the Resource zone has `arrange: "none"`. With
- * `arrange: "stack"` — which is how the shipped seat template authors it — the resource lands
- * square with the deck and the supply instead. Measured on a live table, 2026-08-28: spawned at
- * 270 degrees, read back at the seat facing of 180.
- *
- * Flip the sign if it comes out upside down; nothing else depends on which way it goes.
- */
-var RESOURCE_TURN_DEGREES = 90;
-
 /** Partition ids this game's `data/cardSchema.json` declares. */
 var PARTITION_MAIN = "main";
 var PARTITION_SUPPLY = "supply";
@@ -655,10 +633,17 @@ async function placeDeck(seat, name, mainLines, supplyLines, resourceLines, deck
       label: resourceKey,
       displayName: typeof row.name === "string" && row.name.length > 0 ? row.name : resourceKey,
       position: areas.resource.position,
-      // Turned on its side — a Resource is printed landscape. Whether it STAYS turned is the
-      // zone's decision, not this one's: an `area` zone that auto-arranges overwrites the yaw
-      // with the seat's facing. See RESOURCE_TURN_DEGREES.
-      rotation: { x: 0, y: areas.resource.rotationY + RESOURCE_TURN_DEGREES, z: 0 },
+      // The zone's own yaw, exactly like the two piles.
+      //
+      // 🔴 **A Resource is printed LANDSCAPE, and this script does NOT turn it.** It used to add
+      // 90 degrees here, which never once took effect: an `area` zone that auto-arranges re-lays
+      // its contents on every membership change and sets each piece's yaw to the zone's facing,
+      // so the card was turned back within a frame with nothing logged.
+      //
+      // The zone owns the orientation, so the zone is what gets turned — the seat template gives
+      // the Resource zone `rotationY: 90` and every card laid in it inherits that. Adding a turn
+      // here as well would double it, and would be a second place to look when it came out wrong.
+      rotation: { x: 0, y: areas.resource.rotationY, z: 0 },
       // A resource in play is public information, so it starts face up. The two PILES do not.
       faceDown: false,
       metadata: {

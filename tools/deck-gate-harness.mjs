@@ -51,13 +51,17 @@ function zone(seat, name, x, z, rotationY) {
 }
 
 // The real template, materialised for both seats: red faces 180, blue faces 0.
+//
+// ⚠ The Resource zone carries `rotationY: 90` of its OWN, because a Resource is printed
+// landscape and the zone is what turns — a card laid in an auto-arranging zone inherits that
+// zone's facing and cannot keep one of its own. So the materialised yaw is the seat's plus 90.
 const ZONES = [
   zone("red", "Deck", 1.39, -3.5, 180),
   zone("red", "Supply", -1.4, -3.5, 180),
-  zone("red", "Resource", -1.83, -3.5, 180),
+  zone("red", "Resource", -1.83, -3.5, 270),
   zone("blue", "Deck", 1.39, 3.5, 0),
   zone("blue", "Supply", -1.4, 3.5, 0),
-  zone("blue", "Resource", -1.83, 3.5, 0)
+  zone("blue", "Resource", -1.83, 3.5, 90)
 ];
 
 /**
@@ -346,11 +350,13 @@ console.log("\n4. a player picks; the player reads; the host places");
     main.metadata.cards.some((c) => /#2$/.test(c.cardId)),
     main.metadata.cards.map((c) => c.cardId));
 
-  // A Resource is printed landscape, and the platform keeps rotated art on portrait stock — so
-  // the card itself is what turns.
-  check("the resource card is turned on its side",
-    Math.abs(((cards[0]?.rotation.y ?? 0) - 0 + 360) % 180) === 90,
-    cards[0]?.rotation);
+  // 🔴 The resource takes the ZONE'S yaw and adds nothing of its own. The zone is turned 90 in
+  // the seat template because a Resource is printed landscape; a card in an auto-arranging zone
+  // inherits that facing and cannot keep one of its own, so a turn added here would only ever
+  // double up on a zone with arrange off.
+  check("the resource inherits the zone's own facing, unmodified",
+    cards[0]?.rotation.y === 90,
+    { got: cards[0]?.rotation.y, zone: 90 });
   check("the resource resolves its own face", cards[0]?.metadata.cardSource?.partitionId === "resource",
     cards[0]?.metadata.cardSource);
   check("and is labelled with the catalogue id", cards[0]?.label === "SW003_Tatooine", cards[0]?.label);
