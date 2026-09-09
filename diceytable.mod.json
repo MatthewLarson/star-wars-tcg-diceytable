@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "0.4.6",
+  "version": "0.5.0",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -112,5 +112,6 @@
       "repo": "SWTCG-LACKEY",
       "ref": "master"
     }
-  ]
+  ],
+  "slug": "star-wars-trading-card-game-wotc"
 }
