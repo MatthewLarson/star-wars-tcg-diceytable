@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -113,5 +113,16 @@
       "ref": "master"
     }
   ],
-  "slug": "star-wars-trading-card-game-wotc"
+  "slug": "star-wars-trading-card-game-wotc",
+  "lobbyRequirements": [
+    {
+      "id": "deck",
+      "kind": "deck",
+      "label": "Your deck",
+      "appliesTo": "players",
+      "required": true,
+      "minCards": 30,
+      "maxCards": 100
+    }
+  ]
 }
