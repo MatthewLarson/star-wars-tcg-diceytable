@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -90,7 +90,13 @@
       "functions": [
         "deckById",
         "starterDecks",
-        "publicDecks"
+        "publicDecks",
+        "userDecks",
+        "cardDecks",
+        "cardRatings",
+        "tournaments",
+        "tournamentById",
+        "providerStatus"
       ]
     }
   ],
