@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "rendererVersion": 1,
+  "entries": {
+    "@materials/builtin~3Amodel~2Fdie-d4~2Fd4": {
+      "inputHash": "2fb075847ed140ca",
+      "file": "thumbnails/@materials/builtin~3Amodel~2Fdie-d4~2Fd4.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/cover.webp": {
+      "inputHash": "9f86fc157145de9a",
+      "file": "thumbnails/assets/cover.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/models/disgruntled-tokens-a7d556.glb": {
+      "inputHash": "a99895d8bf110058",
+      "file": "thumbnails/assets/models/disgruntled-tokens-a7d556.glb.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/models/model-f2fbfd.glb": {
+      "inputHash": "c8988e807d716a87",
+      "file": "thumbnails/assets/models/model-f2fbfd.glb.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/card-back.webp": {
+      "inputHash": "13ca136db2781ec7",
+      "file": "thumbnails/assets/textures/card-back.webp.webp",
+      "width": 183,
+      "height": 256
+    },
+    "assets/textures/counter-1.webp": {
+      "inputHash": "a634e39b90af990c",
+      "file": "thumbnails/assets/textures/counter-1.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-2.webp": {
+      "inputHash": "feb8947ffe20ce7a",
+      "file": "thumbnails/assets/textures/counter-2.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-3.webp": {
+      "inputHash": "0a9c8a288f071426",
+      "file": "thumbnails/assets/textures/counter-3.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-4.webp": {
+      "inputHash": "8751c4b4fba0ea50",
+      "file": "thumbnails/assets/textures/counter-4.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-5.webp": {
+      "inputHash": "8ad9a9737326fee1",
+      "file": "thumbnails/assets/textures/counter-5.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-6.webp": {
+      "inputHash": "b9a7fc0ac707ac90",
+      "file": "thumbnails/assets/textures/counter-6.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-build.webp": {
+      "inputHash": "576d20e571a37027",
+      "file": "thumbnails/assets/textures/counter-build.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-corruption.webp": {
+      "inputHash": "c7c337c33dc9cca3",
+      "file": "thumbnails/assets/textures/counter-corruption.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-credit.webp": {
+      "inputHash": "e8be9c49c0e1c77d",
+      "file": "thumbnails/assets/textures/counter-credit.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-damage.webp": {
+      "inputHash": "dd728be1c9df63b1",
+      "file": "thumbnails/assets/textures/counter-damage.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-force.webp": {
+      "inputHash": "a2cd05419f4d4cf9",
+      "file": "thumbnails/assets/textures/counter-force.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-granted-activated-ability.webp": {
+      "inputHash": "717244e39d44ddd9",
+      "file": "thumbnails/assets/textures/counter-granted-activated-ability.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-granted-pilot-ability.webp": {
+      "inputHash": "3496961884f56174",
+      "file": "thumbnails/assets/textures/counter-granted-pilot-ability.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-mastery.webp": {
+      "inputHash": "a93b3520b4d02ff8",
+      "file": "thumbnails/assets/textures/counter-mastery.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-misc-purple.webp": {
+      "inputHash": "4054ae9a3b89427a",
+      "file": "thumbnails/assets/textures/counter-misc-purple.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-misc-turquoise.webp": {
+      "inputHash": "f0b1c071dcfce22d",
+      "file": "thumbnails/assets/textures/counter-misc-turquoise.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-misc-yellow.webp": {
+      "inputHash": "b65eb911e198b111",
+      "file": "thumbnails/assets/textures/counter-misc-yellow.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-resource.webp": {
+      "inputHash": "8d068f9f9701840c",
+      "file": "thumbnails/assets/textures/counter-resource.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-static.webp": {
+      "inputHash": "ace3f4432c13083f",
+      "file": "thumbnails/assets/textures/counter-static.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-subtype-dark.webp": {
+      "inputHash": "c590579e76d2bd8c",
+      "file": "thumbnails/assets/textures/counter-subtype-dark.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-subtype-light.webp": {
+      "inputHash": "5abdcf7ea00f5676",
+      "file": "thumbnails/assets/textures/counter-subtype-light.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-subtype-misc.webp": {
+      "inputHash": "7f7656961fd091f3",
+      "file": "thumbnails/assets/textures/counter-subtype-misc.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-temp.webp": {
+      "inputHash": "dd6b8858145c06a4",
+      "file": "thumbnails/assets/textures/counter-temp.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/counter-trigger.webp": {
+      "inputHash": "b7518334466b4ed0",
+      "file": "thumbnails/assets/textures/counter-trigger.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "assets/textures/play-mat.webp": {
+      "inputHash": "3874a4e339e87291",
+      "file": "thumbnails/assets/textures/play-mat.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "media/cover-thumb.webp": {
+      "inputHash": "f8b28cadbabba78c",
+      "file": "thumbnails/media/cover-thumb.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "media/cover.webp": {
+      "inputHash": "5db187a0c0ee5f2a",
+      "file": "thumbnails/media/cover.webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "media/screenshot-0.webp": {
+      "inputHash": "501172ebd3dfa563",
+      "file": "thumbnails/media/screenshot-0.webp.webp",
+      "width": 256,
+      "height": 144
+    },
+    "originals/model-f2fbfd.glb": {
+      "inputHash": "8d9c573223c5b58d",
+      "file": "thumbnails/originals/model-f2fbfd.glb.webp",
+      "width": 256,
+      "height": 256
+    }
+  }
+}
