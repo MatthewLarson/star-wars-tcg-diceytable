@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -107,7 +107,7 @@
     {
       "owner": "SWTCG",
       "repo": "SWTCG-LACKEY",
-      "ref": "master"
+      "ref": "refs/heads/release"
     }
   ],
   "slug": "star-wars-trading-card-game-wotc",
@@ -119,7 +119,74 @@
       "appliesTo": "players",
       "required": true,
       "minCards": 30,
-      "maxCards": 100
+      "maxCards": 100,
+      "deckSources": [
+        "mine",
+        "community"
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "id": "credit-90d8907d-babe-405b-a9e7-0a75d693880d",
+      "paths": [
+        "tools/deck-gate-harness.mjs",
+        "media/screenshot-0.webp",
+        "media/cover.webp",
+        "media/cover-thumb.webp",
+        "assets/cover.webp",
+        "assets/textures/play-mat.webp"
+      ],
+      "origin": "own-work",
+      "recordedAt": "2026-09-19T19:53:07.937Z",
+      "attestation": {
+        "termsVersion": "2026-09-07.1",
+        "acceptedAt": "2026-09-19T19:53:07.937Z",
+        "signedName": "Matt Larson"
+      }
+    },
+    {
+      "id": "credit-a8485009-63f0-43d9-ada5-64bd7976cf7d",
+      "paths": [
+        "assets/textures/counter-trigger.webp",
+        "assets/textures/counter-temp.webp",
+        "assets/textures/counter-subtype-misc.webp",
+        "assets/textures/counter-subtype-light.webp",
+        "assets/textures/counter-subtype-dark.webp",
+        "assets/textures/counter-static.webp",
+        "assets/textures/counter-resource.webp",
+        "assets/textures/counter-misc-yellow.webp",
+        "assets/textures/counter-misc-turquoise.webp",
+        "assets/textures/counter-misc-purple.webp",
+        "assets/textures/counter-mastery.webp",
+        "assets/textures/counter-granted-pilot-ability.webp",
+        "assets/textures/counter-granted-activated-ability.webp",
+        "assets/textures/counter-force.webp",
+        "assets/textures/counter-damage.webp",
+        "assets/textures/counter-credit.webp",
+        "assets/textures/counter-corruption.webp",
+        "assets/textures/counter-build.webp",
+        "assets/textures/counter-6.webp",
+        "assets/textures/counter-5.webp",
+        "assets/textures/counter-4.webp",
+        "assets/textures/counter-3.webp",
+        "assets/textures/counter-2.webp",
+        "assets/textures/counter-1.webp",
+        "assets/textures/card-back.webp",
+        "assets/models/disgruntled-tokens-a7d556.glb"
+      ],
+      "origin": "third-party",
+      "title": "Star Wars: Trading Card Game",
+      "creator": "Wizards of the Coast & Lucasfilm Ltd.",
+      "creatorUrl": "https://company.wizards.com/en",
+      "licenseName": "Direct permission from the creator",
+      "notes": "© 2003 Star Wars™ Brand and Images: Lucasfilm Ltd. & ® or TM. Game Design : Wizards of the Coast",
+      "recordedAt": "2026-09-19T19:51:00.672Z",
+      "attestation": {
+        "termsVersion": "2026-09-07.1",
+        "acceptedAt": "2026-09-19T19:51:00.672Z",
+        "signedName": "Matt Larson"
+      }
     }
   ]
 }
