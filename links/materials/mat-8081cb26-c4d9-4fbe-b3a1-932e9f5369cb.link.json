@@ -1,13 +1,13 @@
 {
   "version": 1,
   "source": {
-    "presetId": "builtin:model/die-d4/d4",
+    "presetId": "builtin:model/die-d6/d6",
     "presetKind": "material",
     "type": "preset"
   },
   "sourceHash": "79d89f48ce2f03d6f64f98114d77abb1f196b37b35cfe0d3aa84457f4abbb567",
-  "materialId": "builtin:model/die-d4/d4",
-  "linkedAt": "2026-09-14T03:26:39.891Z",
+  "materialId": "mat-8081cb26-c4d9-4fbe-b3a1-932e9f5369cb",
+  "linkedAt": "2026-09-30T04:34:44.996Z",
   "syncedAt": "2026-10-04T23:00:39.725Z",
   "base": {
     "alphaTest": 0,
@@ -25,7 +25,7 @@
     "depthTest": true,
     "depthWrite": true,
     "diffuse": "#ffffff",
-    "diffuseMap": "/assets/standard-objects/dice/_shared/dice-diffuse-light-67546e5f.png",
+    "diffuseMap": "textures/dice-diffuse-light-67546e5f.png",
     "diffuseTint": true,
     "diffuseVertexColor": false,
     "emissive": "#000000",

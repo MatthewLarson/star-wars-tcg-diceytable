@@ -6,7 +6,7 @@
 
 ---
 
-A Star Wars TCG from Wizards of the Coast
+A Star Wars TCG from Wizards of the Coast, which is now kept alive by the [Independent Development Committee](https://swtcgidc.wordpress.com/)!
 
 ---
 
