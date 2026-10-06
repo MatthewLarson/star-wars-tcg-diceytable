@@ -3,8 +3,20 @@
   "rendererVersion": 1,
   "entries": {
     "@materials/builtin~3Amodel~2Fdie-d4~2Fd4": {
-      "inputHash": "2fb075847ed140ca",
+      "inputHash": "c1b5acfee289e250",
       "file": "thumbnails/@materials/builtin~3Amodel~2Fdie-d4~2Fd4.webp",
+      "width": 256,
+      "height": 256
+    },
+    "@materials/mat-8081cb26-c4d9-4fbe-b3a1-932e9f5369cb": {
+      "inputHash": "fe745c95fa81c5dc",
+      "file": "thumbnails/@materials/mat-8081cb26-c4d9-4fbe-b3a1-932e9f5369cb.webp",
+      "width": 256,
+      "height": 256
+    },
+    "@prefabs/play-mat": {
+      "inputHash": "72604463d7ddec63",
+      "file": "thumbnails/@prefabs/play-mat.webp",
       "width": 256,
       "height": 256
     },
@@ -17,12 +29,6 @@
     "assets/models/disgruntled-tokens-a7d556.glb": {
       "inputHash": "a99895d8bf110058",
       "file": "thumbnails/assets/models/disgruntled-tokens-a7d556.glb.webp",
-      "width": 256,
-      "height": 256
-    },
-    "assets/models/model-f2fbfd.glb": {
-      "inputHash": "c8988e807d716a87",
-      "file": "thumbnails/assets/models/model-f2fbfd.glb.webp",
       "width": 256,
       "height": 256
     },
@@ -200,9 +206,249 @@
       "width": 256,
       "height": 144
     },
+    "originals/die-d6.glb": {
+      "inputHash": "f846b3ecd375ab55",
+      "file": "thumbnails/originals/die-d6.glb.webp",
+      "width": 256,
+      "height": 256
+    },
     "originals/model-f2fbfd.glb": {
       "inputHash": "8d9c573223c5b58d",
       "file": "thumbnails/originals/model-f2fbfd.glb.webp",
+      "width": 256,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-001.webp": {
+      "inputHash": "b0867f73016e909b",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-001.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-002.webp": {
+      "inputHash": "127f47d25197aeb3",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-002.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-003.webp": {
+      "inputHash": "33d05c50eabe9eda",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-003.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-004.webp": {
+      "inputHash": "08da1140e3c7df68",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-004.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-005.webp": {
+      "inputHash": "32dc698b3e5e3204",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-005.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-006.webp": {
+      "inputHash": "358949c14aa0b266",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-006.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-007.webp": {
+      "inputHash": "00c581ee34effee9",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-007.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-008.webp": {
+      "inputHash": "5797588a017b849f",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-008.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-009.webp": {
+      "inputHash": "31f59e906be161da",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-009.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-010.webp": {
+      "inputHash": "65009855729a6bf1",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-010.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-011.webp": {
+      "inputHash": "bd2311393dc05231",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-011.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-012.webp": {
+      "inputHash": "8508cecafcf70321",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-012.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-013.webp": {
+      "inputHash": "fef0bc8c0faa7362",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-013.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-014.webp": {
+      "inputHash": "d68fd23cfdd84f01",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-014.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-015.webp": {
+      "inputHash": "eb617edd4bed3bc3",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-015.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-016.webp": {
+      "inputHash": "d391e432aa9b7c92",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-016.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-017.webp": {
+      "inputHash": "140ec18a48b31654",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-017.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-018.webp": {
+      "inputHash": "7e7c5f87e12a6f4d",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-018.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-019.webp": {
+      "inputHash": "c3b7de4f5bc50bd8",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-019.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-020.webp": {
+      "inputHash": "53c6e9e10a004e34",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-020.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-021.webp": {
+      "inputHash": "c4073c729f3c01d8",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-021.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-022.webp": {
+      "inputHash": "0d43fab233b65e79",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-022.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-023.webp": {
+      "inputHash": "2a51df7a88c7b485",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-023.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-024.webp": {
+      "inputHash": "311c29bf668d21d9",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-024.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-025.webp": {
+      "inputHash": "7327d406f18bb90c",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-025.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-026.webp": {
+      "inputHash": "3fd832ea2f9e4ecb",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-026.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-027.webp": {
+      "inputHash": "f85572f2b0d99a04",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-027.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-028.webp": {
+      "inputHash": "806db2b06eaa0396",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-028.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-029.webp": {
+      "inputHash": "2b11fea951967234",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-029.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-030.webp": {
+      "inputHash": "a8a53a495382e7a1",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-030.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-031.webp": {
+      "inputHash": "22c89df0ac0d03a5",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-031.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-032.webp": {
+      "inputHash": "2c66972941a820d0",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-032.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-033.webp": {
+      "inputHash": "dadce11e96ccad07",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-033.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-034.webp": {
+      "inputHash": "2f50c5024d1afe60",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-034.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-035.webp": {
+      "inputHash": "1b167fd560f32a28",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-035.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-036.webp": {
+      "inputHash": "f97a0f2e5aef3a65",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-036.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-037.webp": {
+      "inputHash": "057845bea7c54fa1",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-037.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "rules/2022-star-wars-trading-card-game/page-038.webp": {
+      "inputHash": "6d98b59b496ee549",
+      "file": "thumbnails/rules/2022-star-wars-trading-card-game/page-038.webp.webp",
+      "width": 181,
+      "height": 256
+    },
+    "textures/dice-diffuse-light-67546e5f.png": {
+      "inputHash": "db816217924419ad",
+      "file": "thumbnails/textures/dice-diffuse-light-67546e5f.png.webp",
       "width": 256,
       "height": 256
     }

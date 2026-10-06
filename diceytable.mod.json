@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "0.5.5",
+  "version": "1.0.1",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -12,9 +12,6 @@
     "assets/cards/swtcg.cards.json",
     "assets/cover.webp",
     "assets/models/disgruntled-tokens-a7d556.glb",
-    "assets/models/model-f2fbfd.collider.glb",
-    "assets/models/model-f2fbfd.glb",
-    "assets/models/model-f2fbfd.meta.json",
     "assets/textures/card-back.webp",
     "assets/textures/counter-1.webp",
     "assets/textures/counter-2.webp",
@@ -44,7 +41,8 @@
     "data/cardSchema.json",
     "media/cover-thumb.webp",
     "media/cover.webp",
-    "media/screenshot-0.webp"
+    "media/screenshot-0.webp",
+    "textures/dice-diffuse-light-67546e5f.png"
   ],
   "compatibility": {
     "engine": ">=0.1 <1.0"
@@ -53,16 +51,7 @@
     "version": "1",
     "allowed": [
       "log",
-      "ui",
-      "read-context",
-      "read-world",
-      "subscribe-events",
-      "spawn-object",
-      "object-action",
-      "plugin-call",
-      "read-cards",
-      "read-decks",
-      "host-message"
+      "plugin-call"
     ]
   },
   "license": "MIT",
@@ -75,7 +64,7 @@
     "trading-card-game"
   ],
   "summary": "A Star Wars TCG from Wizards of the Coast",
-  "description": "A Star Wars TCG from Wizards of the Coast",
+  "description": "A Star Wars TCG from Wizards of the Coast, which is now kept alive by the [Independent Development Committee](https://swtcgidc.wordpress.com/)!",
   "category": "ccg-lcg",
   "players": {
     "min": 2,
@@ -97,15 +86,7 @@
     {
       "id": "community.swtcg-deckdb",
       "functions": [
-        "deckById",
-        "starterDecks",
-        "publicDecks",
-        "userDecks",
-        "cardDecks",
-        "cardRatings",
-        "tournaments",
-        "tournamentById",
-        "providerStatus"
+        "publicDecks"
       ]
     }
   ],
@@ -131,8 +112,13 @@
       "maxCards": 100,
       "deckSources": [
         "mine",
-        "community"
-      ]
+        "community",
+        "database"
+      ],
+      "deckDatabase": {
+        "pluginId": "community.swtcg-deckdb",
+        "listFunction": "publicDecks"
+      }
     }
   ],
   "credits": [
@@ -196,6 +182,111 @@
         "acceptedAt": "2026-09-19T19:51:00.672Z",
         "signedName": "Matt Larson"
       }
+    },
+    {
+      "id": "link-8b0366c3",
+      "paths": [
+        "links/materials/mat-8081cb26-c4d9-4fbe-b3a1-932e9f5369cb.link.json"
+      ],
+      "origin": "third-party",
+      "title": "Dice-Box default dice theme",
+      "creator": "3D Dice (Frank Ali); models supplied by Quest Portal",
+      "creatorUrl": "https://github.com/3d-dice",
+      "sourceUrl": "https://github.com/3d-dice/dice-box/tree/main/public/assets/dice-box/themes/default",
+      "licenseName": "MIT",
+      "licenseUrl": "https://github.com/3d-dice/dice-box/blob/main/LICENSE",
+      "notes": "MIT License. Copyright (c) 2021 3Ddice. The copyright notice and the MIT permission notice (see the licence link) must be included with all copies or substantial portions. Models and diffuse texture from dice-box's default theme; DiceyTable flattened the texture onto an opaque background.",
+      "recordedAt": "2026-09-30T04:34:44.996Z",
+      "source": {
+        "type": "preset",
+        "presetKind": "material",
+        "presetId": "builtin:model/die-d6/d6"
+      },
+      "locked": true
+    },
+    {
+      "id": "link-252a6305",
+      "paths": [
+        "textures/dice-diffuse-light-67546e5f.png"
+      ],
+      "origin": "third-party",
+      "title": "Dice-Box default dice theme",
+      "creator": "3D Dice (Frank Ali); models supplied by Quest Portal",
+      "creatorUrl": "https://github.com/3d-dice",
+      "sourceUrl": "https://github.com/3d-dice/dice-box/tree/main/public/assets/dice-box/themes/default",
+      "licenseName": "MIT",
+      "licenseUrl": "https://github.com/3d-dice/dice-box/blob/main/LICENSE",
+      "notes": "MIT License. Copyright (c) 2021 3Ddice. The copyright notice and the MIT permission notice (see the licence link) must be included with all copies or substantial portions. Models and diffuse texture from dice-box's default theme; DiceyTable flattened the texture onto an opaque background.",
+      "recordedAt": "2026-09-30T04:34:44.996Z",
+      "source": {
+        "type": "preset",
+        "presetKind": "texture",
+        "presetId": "builtin-tex:model/dice/diffuse"
+      },
+      "locked": true
+    },
+    {
+      "id": "credit-cfb09594-a4dd-4a57-8488-f5e15016f09c",
+      "paths": [
+        "rules/2022-star-wars-trading-card-game/page-038.webp",
+        "rules/2022-star-wars-trading-card-game/page-037.webp",
+        "rules/2022-star-wars-trading-card-game/page-036.webp",
+        "rules/2022-star-wars-trading-card-game/page-035.webp",
+        "rules/2022-star-wars-trading-card-game/page-034.webp",
+        "rules/2022-star-wars-trading-card-game/page-033.webp",
+        "rules/2022-star-wars-trading-card-game/page-032.webp",
+        "rules/2022-star-wars-trading-card-game/page-031.webp",
+        "rules/2022-star-wars-trading-card-game/page-030.webp",
+        "rules/2022-star-wars-trading-card-game/page-029.webp",
+        "rules/2022-star-wars-trading-card-game/page-028.webp",
+        "rules/2022-star-wars-trading-card-game/page-027.webp",
+        "rules/2022-star-wars-trading-card-game/page-026.webp",
+        "rules/2022-star-wars-trading-card-game/page-025.webp",
+        "rules/2022-star-wars-trading-card-game/page-024.webp",
+        "rules/2022-star-wars-trading-card-game/page-023.webp",
+        "rules/2022-star-wars-trading-card-game/page-022.webp",
+        "rules/2022-star-wars-trading-card-game/page-021.webp",
+        "rules/2022-star-wars-trading-card-game/page-020.webp",
+        "rules/2022-star-wars-trading-card-game/page-019.webp",
+        "rules/2022-star-wars-trading-card-game/page-018.webp",
+        "rules/2022-star-wars-trading-card-game/page-017.webp",
+        "rules/2022-star-wars-trading-card-game/page-016.webp",
+        "rules/2022-star-wars-trading-card-game/page-015.webp",
+        "rules/2022-star-wars-trading-card-game/page-014.webp",
+        "rules/2022-star-wars-trading-card-game/page-013.webp",
+        "rules/2022-star-wars-trading-card-game/page-012.webp",
+        "rules/2022-star-wars-trading-card-game/page-011.webp",
+        "rules/2022-star-wars-trading-card-game/page-010.webp",
+        "rules/2022-star-wars-trading-card-game/page-009.webp",
+        "rules/2022-star-wars-trading-card-game/page-008.webp",
+        "rules/2022-star-wars-trading-card-game/page-007.webp",
+        "rules/2022-star-wars-trading-card-game/page-006.webp",
+        "rules/2022-star-wars-trading-card-game/page-005.webp",
+        "rules/2022-star-wars-trading-card-game/page-004.webp",
+        "rules/2022-star-wars-trading-card-game/page-003.webp",
+        "rules/2022-star-wars-trading-card-game/page-002.webp",
+        "rules/2022-star-wars-trading-card-game/page-001.webp"
+      ],
+      "origin": "third-party",
+      "title": "2022 Complete Updated Rulebook",
+      "creator": "SWTCG IDC",
+      "creatorUrl": "https://swtcgidc.wordpress.com/",
+      "sourceUrl": "https://swtcgidc.wordpress.com/rules/",
+      "licenseName": "CC0 1.0 (Public Domain)",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "notes": "Original rules were created by Wizards of the Coast, but this document and many of its rule updates, were created by the IDC.",
+      "recordedAt": "2026-10-06T02:23:54.489Z",
+      "attestation": {
+        "termsVersion": "2026-09-07.1",
+        "acceptedAt": "2026-10-06T02:23:54.489Z",
+        "signedName": "Matt Larson"
+      }
+    }
+  ],
+  "dice": [
+    {
+      "preset": "die-d6",
+      "defaultCount": 4
     }
   ]
 }

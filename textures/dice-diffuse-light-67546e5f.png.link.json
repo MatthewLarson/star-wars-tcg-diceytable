@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "source": {
+    "presetId": "builtin-tex:model/dice/diffuse",
+    "presetKind": "texture",
+    "type": "preset"
+  },
+  "sourceHash": "f95268b0668d39a891bde42c963c96f4f2be344ae0a51352432ab907b737beb4",
+  "linkedAt": "2026-09-30T04:34:44.996Z",
+  "syncedAt": "2026-09-30T04:34:44.996Z",
+  "bytes": [
+    {
+      "path": "textures/dice-diffuse-light-67546e5f.png",
+      "sha256": "67546e5f97722059acede86334b02cbf6b84dde61381ed433122e7948bcf1024",
+      "sourceDigest": "67546e5f97722059acede86334b02cbf6b84dde61381ed433122e7948bcf1024",
+      "sourceRef": "/assets/standard-objects/dice/_shared/dice-diffuse-light-67546e5f.png"
+    }
+  ],
+  "base": {
+    "addressU": "repeat",
+    "addressV": "repeat",
+    "anisotropy": 1,
+    "filtering": "linear",
+    "mipmaps": true,
+    "rgbm": false,
+    "srgb": true
+  },
+  "overrides": {}
+}
