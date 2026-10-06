@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "source": {
+    "presetId": "quarter",
+    "presetKind": "model",
+    "type": "preset"
+  },
+  "sourceHash": "a1d2859f99dacc99c7fc0f4d1430390c7aa2ce71d012e7ede82831537f4c632b",
+  "linkedAt": "2026-10-06T22:37:51.207Z",
+  "syncedAt": "2026-10-06T22:37:51.207Z",
+  "bytes": [
+    {
+      "path": "models/quarter.glb",
+      "sha256": "e1c48c4bc96ac079805df89037f4509f8f29354b7d198b5005954db3edd16d49",
+      "sourceDigest": "baa2bc76f3e8d65b4a2ed7d4bb1db0ad0e79d2ea297e225f050fa2ff247b2653",
+      "sourceRef": "/assets/standard-objects/pieces/quarter/model.glb"
+    }
+  ],
+  "base": {
+    "collider": {
+      "entries": [
+        {
+          "axis": 1,
+          "height": 0.0057,
+          "id": "collider-1",
+          "name": "quarter-collider",
+          "radius": 0.0398,
+          "shape": "cylinder"
+        }
+      ],
+      "mode": "custom"
+    },
+    "collisionShape": "cylinder",
+    "color": "#c9d1d9",
+    "kind": "token",
+    "material": "metal",
+    "materialSlots": {
+      "quarter_mat": "mat-3b39b414-6eee-4159-b102-53f1d913c561"
+    },
+    "metadata": {
+      "standardPresetFamily": "pieces",
+      "standardPresetVariant": "quarter",
+      "tokenShape": "cylinder"
+    },
+    "originAuthored": true,
+    "spawnHeight": 0.45
+  },
+  "overrides": {}
+}

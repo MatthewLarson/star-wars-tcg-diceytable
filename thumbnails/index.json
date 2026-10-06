@@ -8,6 +8,12 @@
       "width": 256,
       "height": 256
     },
+    "@materials/mat-3b39b414-6eee-4159-b102-53f1d913c561": {
+      "inputHash": "beb6e0828af3b34e",
+      "file": "thumbnails/@materials/mat-3b39b414-6eee-4159-b102-53f1d913c561.webp",
+      "width": 256,
+      "height": 256
+    },
     "@materials/mat-8081cb26-c4d9-4fbe-b3a1-932e9f5369cb": {
       "inputHash": "fe745c95fa81c5dc",
       "file": "thumbnails/@materials/mat-8081cb26-c4d9-4fbe-b3a1-932e9f5369cb.webp",
@@ -205,6 +211,12 @@
       "file": "thumbnails/media/screenshot-0.webp.webp",
       "width": 256,
       "height": 144
+    },
+    "models/quarter.glb": {
+      "inputHash": "0aecc70085c39676",
+      "file": "thumbnails/models/quarter.glb.webp",
+      "width": 256,
+      "height": 256
     },
     "originals/die-d6.glb": {
       "inputHash": "f846b3ecd375ab55",
@@ -449,6 +461,24 @@
     "textures/dice-diffuse-light-67546e5f.png": {
       "inputHash": "db816217924419ad",
       "file": "thumbnails/textures/dice-diffuse-light-67546e5f.png.webp",
+      "width": 256,
+      "height": 256
+    },
+    "textures/quarter-basecolor-70870e5e.png": {
+      "inputHash": "6e0750ad313320e9",
+      "file": "thumbnails/textures/quarter-basecolor-70870e5e.png.webp",
+      "width": 256,
+      "height": 256
+    },
+    "textures/quarter-mr-c3f547f4.png": {
+      "inputHash": "7f9cb72e78b3a606",
+      "file": "thumbnails/textures/quarter-mr-c3f547f4.png.webp",
+      "width": 256,
+      "height": 256
+    },
+    "textures/quarter-normal-8c5c028b.png": {
+      "inputHash": "5f153f20eac9cc7d",
+      "file": "thumbnails/textures/quarter-normal-8c5c028b.png.webp",
       "width": 256,
       "height": 256
     }

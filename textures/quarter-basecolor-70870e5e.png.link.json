@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "source": {
+    "presetId": "builtin-tex:model/quarter/diffuse",
+    "presetKind": "texture",
+    "type": "preset"
+  },
+  "sourceHash": "a2512c71997381b13ea81c7f4a24b42d1d46f2f67abdecc1d1b8181b8ba9660e",
+  "linkedAt": "2026-10-06T22:37:51.207Z",
+  "syncedAt": "2026-10-06T22:37:51.207Z",
+  "bytes": [
+    {
+      "path": "textures/quarter-basecolor-70870e5e.png",
+      "sha256": "70870e5e1a78761c90eac271f55f3d3b1539f59658e6bbd9cc3aad102217ed8f",
+      "sourceDigest": "70870e5e1a78761c90eac271f55f3d3b1539f59658e6bbd9cc3aad102217ed8f",
+      "sourceRef": "/assets/standard-objects/pieces/quarter/quarter-basecolor-70870e5e.png"
+    }
+  ],
+  "base": {
+    "addressU": "repeat",
+    "addressV": "repeat",
+    "anisotropy": 1,
+    "filtering": "linear",
+    "mipmaps": true,
+    "rgbm": false,
+    "srgb": true
+  },
+  "overrides": {}
+}

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "source": {
+    "presetId": "builtin-tex:model/quarter/roughness",
+    "presetKind": "texture",
+    "type": "preset"
+  },
+  "sourceHash": "4d66c19cac4b15a0e23125e4ca502e7cbe0e854e4e86cdfe24c1b80c180813a7",
+  "linkedAt": "2026-10-06T22:37:51.207Z",
+  "syncedAt": "2026-10-06T22:37:51.207Z",
+  "bytes": [
+    {
+      "path": "textures/quarter-mr-c3f547f4.png",
+      "sha256": "c3f547f4ceda7556d449c4bfa1672d7e875e299099462e2f8bde02aa9b432d6c",
+      "sourceDigest": "c3f547f4ceda7556d449c4bfa1672d7e875e299099462e2f8bde02aa9b432d6c",
+      "sourceRef": "/assets/standard-objects/pieces/quarter/quarter-mr-c3f547f4.png"
+    }
+  ],
+  "base": {
+    "addressU": "repeat",
+    "addressV": "repeat",
+    "anisotropy": 1,
+    "filtering": "linear",
+    "mipmaps": true,
+    "rgbm": false,
+    "srgb": true
+  },
+  "overrides": {}
+}

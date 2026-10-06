@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -42,7 +42,12 @@
     "media/cover-thumb.webp",
     "media/cover.webp",
     "media/screenshot-0.webp",
-    "textures/dice-diffuse-light-67546e5f.png"
+    "models/quarter.glb",
+    "models/quarter.meta.json",
+    "textures/dice-diffuse-light-67546e5f.png",
+    "textures/quarter-basecolor-70870e5e.png",
+    "textures/quarter-mr-c3f547f4.png",
+    "textures/quarter-normal-8c5c028b.png"
   ],
   "compatibility": {
     "engine": ">=0.1 <1.0"
@@ -290,6 +295,92 @@
         "acceptedAt": "2026-10-06T02:23:54.489Z",
         "signedName": "Matt Larson"
       }
+    },
+    {
+      "id": "link-2ac28f96",
+      "paths": [
+        "models/quarter.glb",
+        "models/quarter.meta.json"
+      ],
+      "origin": "own-work",
+      "title": "DiceyTable procedural standard objects",
+      "creator": "DiceyTable",
+      "notes": "Geometry and textures generated in-repo. Checkers and go stones sample Poly Haven CC0 plates (oak_veneer_01, white_plaster_02, seaside_rock), which carry no obligation.",
+      "recordedAt": "2026-10-06T22:37:51.207Z",
+      "source": {
+        "type": "preset",
+        "presetKind": "model",
+        "presetId": "quarter"
+      },
+      "locked": true
+    },
+    {
+      "id": "link-4cc75508",
+      "paths": [
+        "links/materials/mat-3b39b414-6eee-4159-b102-53f1d913c561.link.json"
+      ],
+      "origin": "own-work",
+      "title": "DiceyTable procedural standard objects",
+      "creator": "DiceyTable",
+      "notes": "Geometry and textures generated in-repo. Checkers and go stones sample Poly Haven CC0 plates (oak_veneer_01, white_plaster_02, seaside_rock), which carry no obligation.",
+      "recordedAt": "2026-10-06T22:37:51.207Z",
+      "source": {
+        "type": "preset",
+        "presetKind": "material",
+        "presetId": "builtin:model/quarter/quarter"
+      },
+      "locked": true
+    },
+    {
+      "id": "link-d7b30bc1",
+      "paths": [
+        "textures/quarter-basecolor-70870e5e.png"
+      ],
+      "origin": "own-work",
+      "title": "DiceyTable procedural standard objects",
+      "creator": "DiceyTable",
+      "notes": "Geometry and textures generated in-repo. Checkers and go stones sample Poly Haven CC0 plates (oak_veneer_01, white_plaster_02, seaside_rock), which carry no obligation.",
+      "recordedAt": "2026-10-06T22:37:51.207Z",
+      "source": {
+        "type": "preset",
+        "presetKind": "texture",
+        "presetId": "builtin-tex:model/quarter/diffuse"
+      },
+      "locked": true
+    },
+    {
+      "id": "link-f4677fdf",
+      "paths": [
+        "textures/quarter-mr-c3f547f4.png"
+      ],
+      "origin": "own-work",
+      "title": "DiceyTable procedural standard objects",
+      "creator": "DiceyTable",
+      "notes": "Geometry and textures generated in-repo. Checkers and go stones sample Poly Haven CC0 plates (oak_veneer_01, white_plaster_02, seaside_rock), which carry no obligation.",
+      "recordedAt": "2026-10-06T22:37:51.207Z",
+      "source": {
+        "type": "preset",
+        "presetKind": "texture",
+        "presetId": "builtin-tex:model/quarter/roughness"
+      },
+      "locked": true
+    },
+    {
+      "id": "link-dfececab",
+      "paths": [
+        "textures/quarter-normal-8c5c028b.png"
+      ],
+      "origin": "own-work",
+      "title": "DiceyTable procedural standard objects",
+      "creator": "DiceyTable",
+      "notes": "Geometry and textures generated in-repo. Checkers and go stones sample Poly Haven CC0 plates (oak_veneer_01, white_plaster_02, seaside_rock), which carry no obligation.",
+      "recordedAt": "2026-10-06T22:37:51.207Z",
+      "source": {
+        "type": "preset",
+        "presetKind": "texture",
+        "presetId": "builtin-tex:model/quarter/normal"
+      },
+      "locked": true
     }
   ],
   "dice": [
