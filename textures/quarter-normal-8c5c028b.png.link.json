@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "source": {
+    "presetId": "builtin-tex:model/quarter/normal",
+    "presetKind": "texture",
+    "type": "preset"
+  },
+  "sourceHash": "ee169c49cf1d058123a61f607aa98587a2bcb8525b4bb508071b45c6d952f65f",
+  "linkedAt": "2026-10-06T22:37:51.207Z",
+  "syncedAt": "2026-10-06T22:37:51.207Z",
+  "bytes": [
+    {
+      "path": "textures/quarter-normal-8c5c028b.png",
+      "sha256": "8c5c028b5667f2466fe5664ef63d8ddccda3947579dacbaf83126ae910547902",
+      "sourceDigest": "8c5c028b5667f2466fe5664ef63d8ddccda3947579dacbaf83126ae910547902",
+      "sourceRef": "/assets/standard-objects/pieces/quarter/quarter-normal-8c5c028b.png"
+    }
+  ],
+  "base": {
+    "addressU": "repeat",
+    "addressV": "repeat",
+    "anisotropy": 1,
+    "filtering": "linear",
+    "mipmaps": true,
+    "rgbm": false,
+    "srgb": true
+  },
+  "overrides": {}
+}
