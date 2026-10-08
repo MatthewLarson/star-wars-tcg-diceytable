@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -42,6 +42,11 @@
     "media/cover-thumb.webp",
     "media/cover.webp",
     "media/screenshot-0.webp",
+    "models/dice/die-1.die.json",
+    "models/dice/die-2.die.json",
+    "models/dice/die-3.die.json",
+    "models/dice/die-4.die.json",
+    "models/dice/die-5.die.json",
     "models/quarter.glb",
     "models/quarter.meta.json",
     "textures/dice-diffuse-light-67546e5f.png",
@@ -100,7 +105,15 @@
     {
       "id": "community.swtcg-deckdb",
       "functions": [
-        "publicDecks"
+        "deckById",
+        "starterDecks",
+        "publicDecks",
+        "userDecks",
+        "cardDecks",
+        "cardRatings",
+        "tournaments",
+        "tournamentById",
+        "providerStatus"
       ]
     }
   ],
@@ -387,6 +400,60 @@
     {
       "preset": "die-d6",
       "defaultCount": 4
+    }
+  ],
+  "variants": [
+    {
+      "id": "standard",
+      "name": "Standard"
+    },
+    {
+      "id": "scripted",
+      "name": "Scripted",
+      "description": "The scripted variant with rules enforced.",
+      "rulesEnforced": true,
+      "ranking": {
+        "draws": true,
+        "requireKernel": true,
+        "takebacks": false
+      }
+    }
+  ],
+  "bots": [
+    {
+      "id": "greedy",
+      "label": "Trooper (easy)",
+      "kind": "scripted",
+      "handler": "greedy",
+      "seats": {
+        "max": 1
+      },
+      "description": "Deploys its biggest affordable units, attacks what it can kill, never retreats."
+    },
+    {
+      "id": "search",
+      "label": "Commander",
+      "kind": "scripted",
+      "handler": "search",
+      "difficulties": [
+        {
+          "id": "easy",
+          "label": "Easy"
+        },
+        {
+          "id": "medium",
+          "label": "Medium"
+        },
+        {
+          "id": "hard",
+          "label": "Hard"
+        }
+      ],
+      "defaultDifficulty": "medium",
+      "seats": {
+        "max": 1
+      },
+      "description": "Searches ahead with the rules (it never sees your hand or deck order)."
     }
   ]
 }
