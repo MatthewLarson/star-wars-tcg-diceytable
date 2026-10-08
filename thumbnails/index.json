@@ -8,9 +8,21 @@
       "width": 256,
       "height": 256
     },
+    "@materials/mat-32cc4a75-64f9-49dc-9768-af4d5ded105f": {
+      "inputHash": "7748dbbc7da2e19b",
+      "file": "thumbnails/@materials/mat-32cc4a75-64f9-49dc-9768-af4d5ded105f.webp",
+      "width": 256,
+      "height": 256
+    },
     "@materials/mat-3b39b414-6eee-4159-b102-53f1d913c561": {
       "inputHash": "beb6e0828af3b34e",
       "file": "thumbnails/@materials/mat-3b39b414-6eee-4159-b102-53f1d913c561.webp",
+      "width": 256,
+      "height": 256
+    },
+    "@materials/mat-6d6147b4-e412-49f3-b9ae-a38f04e9fb88": {
+      "inputHash": "7748dbbc7da2e19b",
+      "file": "thumbnails/@materials/mat-6d6147b4-e412-49f3-b9ae-a38f04e9fb88.webp",
       "width": 256,
       "height": 256
     },
@@ -221,12 +233,6 @@
     "originals/die-d6.glb": {
       "inputHash": "f846b3ecd375ab55",
       "file": "thumbnails/originals/die-d6.glb.webp",
-      "width": 256,
-      "height": 256
-    },
-    "originals/model-f2fbfd.glb": {
-      "inputHash": "8d9c573223c5b58d",
-      "file": "thumbnails/originals/model-f2fbfd.glb.webp",
       "width": 256,
       "height": 256
     },

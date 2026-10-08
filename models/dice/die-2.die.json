@@ -1,0 +1,59 @@
+{
+  "format": "diceytable.die",
+  "version": 1,
+  "name": "Die 2",
+  "shape": "die-d6",
+  "body": {
+    "color": "#f3efe6",
+    "material": "plastic",
+    "roughness": 0.4,
+    "metalness": 0,
+    "opacity": 1,
+    "pattern": {
+      "kind": "none",
+      "color": "#202020",
+      "scale": 0.5,
+      "amount": 0.5
+    }
+  },
+  "ink": {
+    "color": "#1c1c22",
+    "depth": 0.55
+  },
+  "font": {
+    "family": "Arial",
+    "weight": "bold",
+    "italic": false
+  },
+  "rounding": 0.2,
+  "glyphScale": 0.62,
+  "pipScale": 1,
+  "sixNineMarker": "underline",
+  "textureSize": 1024,
+  "faces": [
+    {
+      "value": 1,
+      "content": "pips"
+    },
+    {
+      "value": 2,
+      "content": "pips"
+    },
+    {
+      "value": 3,
+      "content": "pips"
+    },
+    {
+      "value": 4,
+      "content": "pips"
+    },
+    {
+      "value": 5,
+      "content": "pips"
+    },
+    {
+      "value": 6,
+      "content": "pips"
+    }
+  ]
+}

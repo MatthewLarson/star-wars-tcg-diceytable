@@ -1,0 +1,138 @@
+{
+  "format": "diceytable.die",
+  "version": 1,
+  "name": "Dragon D20",
+  "shape": "die-d20",
+  "body": {
+    "color": "#b3202a",
+    "material": "glass",
+    "surface": "glass",
+    "density": 2.5,
+    "roughness": 0.03,
+    "metalness": 0,
+    "opacity": 0.45,
+    "pattern": {
+      "kind": "speckle",
+      "color": "#f74c22",
+      "scale": 0.5,
+      "amount": 0.5
+    },
+    "overlays": {
+      "scratches": 0.41,
+      "bumps": 0,
+      "rust": 0,
+      "tarnish": 0,
+      "cracks": 0.77
+    }
+  },
+  "inclusion": {
+    "model": "models/dragon+skull+3d+model.glb",
+    "size": 0.89,
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "offset": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+  "ink": {
+    "color": "#490303",
+    "depth": 0.55
+  },
+  "font": {
+    "family": "Arial",
+    "weight": "bold",
+    "italic": false
+  },
+  "rounding": 0.2,
+  "glyphScale": 0.62,
+  "pipScale": 1,
+  "sixNineMarker": "underline",
+  "textureSize": 1024,
+  "faces": [
+    {
+      "value": 1,
+      "content": "number"
+    },
+    {
+      "value": 2,
+      "content": "number"
+    },
+    {
+      "value": 3,
+      "content": "number"
+    },
+    {
+      "value": 4,
+      "content": "number"
+    },
+    {
+      "value": 5,
+      "content": "number"
+    },
+    {
+      "value": 6,
+      "content": "number"
+    },
+    {
+      "value": 7,
+      "content": "number"
+    },
+    {
+      "value": 8,
+      "content": "number"
+    },
+    {
+      "value": 9,
+      "content": "number"
+    },
+    {
+      "value": 10,
+      "content": "number"
+    },
+    {
+      "value": 11,
+      "content": "number"
+    },
+    {
+      "value": 12,
+      "content": "number"
+    },
+    {
+      "value": 13,
+      "content": "number"
+    },
+    {
+      "value": 14,
+      "content": "number"
+    },
+    {
+      "value": 15,
+      "content": "number"
+    },
+    {
+      "value": 16,
+      "content": "number"
+    },
+    {
+      "value": 17,
+      "content": "number"
+    },
+    {
+      "value": 18,
+      "content": "number"
+    },
+    {
+      "value": 19,
+      "content": "number"
+    },
+    {
+      "value": 20,
+      "content": "number"
+    }
+  ]
+}
