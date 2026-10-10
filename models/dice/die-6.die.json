@@ -1,0 +1,70 @@
+{
+  "format": "diceytable.die",
+  "version": 1,
+  "name": "Light Side D6",
+  "shape": "die-d6",
+  "body": {
+    "color": "#1f4fa8",
+    "material": "stone-kintsugi",
+    "surface": "stone",
+    "density": 2.4,
+    "roughness": 0.16,
+    "metalness": 0,
+    "opacity": 1,
+    "pattern": {
+      "kind": "none",
+      "color": "#202020",
+      "scale": 0.5,
+      "amount": 0.5
+    },
+    "overlays": {
+      "scratches": 0,
+      "bumps": 0,
+      "rust": 0,
+      "tarnish": 0.27,
+      "cracks": 0,
+      "kintsugi": 0.97
+    },
+    "seamColor": "#dfe0e5"
+  },
+  "ink": {
+    "color": "#ffffff",
+    "depth": 0.55
+  },
+  "font": {
+    "family": "Arial",
+    "weight": "bold",
+    "italic": false
+  },
+  "rounding": 0.13,
+  "glyphScale": 0.62,
+  "pipScale": 1.2,
+  "sixNineMarker": "underline",
+  "textureSize": 1024,
+  "faces": [
+    {
+      "value": 1,
+      "content": "pips"
+    },
+    {
+      "value": 2,
+      "content": "pips"
+    },
+    {
+      "value": 3,
+      "content": "pips"
+    },
+    {
+      "value": 4,
+      "content": "pips"
+    },
+    {
+      "value": 5,
+      "content": "pips"
+    },
+    {
+      "value": 6,
+      "content": "pips"
+    }
+  ]
+}
