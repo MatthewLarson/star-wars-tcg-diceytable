@@ -224,6 +224,18 @@
       "width": 256,
       "height": 144
     },
+    "models/dice/die-6.glb": {
+      "inputHash": "0e9e5df46fd2fbe5",
+      "file": "thumbnails/models/dice/die-6.glb.webp",
+      "width": 256,
+      "height": 256
+    },
+    "models/dice/die-7.glb": {
+      "inputHash": "0300b93fe9984660",
+      "file": "thumbnails/models/dice/die-7.glb.webp",
+      "width": 256,
+      "height": 256
+    },
     "models/quarter.glb": {
       "inputHash": "0aecc70085c39676",
       "file": "thumbnails/models/quarter.glb.webp",
@@ -235,6 +247,54 @@
       "file": "thumbnails/originals/die-d6.glb.webp",
       "width": 256,
       "height": 256
+    },
+    "originals/side-dark.png": {
+      "inputHash": "0a4dd9a2f6cf6677",
+      "file": "thumbnails/originals/side-dark.png.webp",
+      "width": 64,
+      "height": 64
+    },
+    "originals/side-light.png": {
+      "inputHash": "38db3aa707af76bd",
+      "file": "thumbnails/originals/side-light.png.webp",
+      "width": 64,
+      "height": 64
+    },
+    "originals/side-neutral.png": {
+      "inputHash": "9e20d7294fbe1305",
+      "file": "thumbnails/originals/side-neutral.png.webp",
+      "width": 64,
+      "height": 64
+    },
+    "originals/side-vong.png": {
+      "inputHash": "b44faebd4094a34e",
+      "file": "thumbnails/originals/side-vong.png.webp",
+      "width": 64,
+      "height": 64
+    },
+    "originals/stat-cost.png": {
+      "inputHash": "3a6267972f3e9402",
+      "file": "thumbnails/originals/stat-cost.png.webp",
+      "width": 128,
+      "height": 128
+    },
+    "originals/stat-health.png": {
+      "inputHash": "da131c21f6e0adfa",
+      "file": "thumbnails/originals/stat-health.png.webp",
+      "width": 128,
+      "height": 128
+    },
+    "originals/stat-power.png": {
+      "inputHash": "9cfe2df8fffeeb56",
+      "file": "thumbnails/originals/stat-power.png.webp",
+      "width": 128,
+      "height": 128
+    },
+    "originals/stat-speed.png": {
+      "inputHash": "5b4ce8d87ecfd919",
+      "file": "thumbnails/originals/stat-speed.png.webp",
+      "width": 128,
+      "height": 128
     },
     "rules/2022-star-wars-trading-card-game/page-001.webp": {
       "inputHash": "b0867f73016e909b",
@@ -487,6 +547,54 @@
       "file": "thumbnails/textures/quarter-normal-8c5c028b.png.webp",
       "width": 256,
       "height": 256
+    },
+    "ui/side-dark.webp": {
+      "inputHash": "c681d150905e354d",
+      "file": "thumbnails/ui/side-dark.webp.webp",
+      "width": 64,
+      "height": 64
+    },
+    "ui/side-light.webp": {
+      "inputHash": "41ade20062b5d350",
+      "file": "thumbnails/ui/side-light.webp.webp",
+      "width": 64,
+      "height": 64
+    },
+    "ui/side-neutral.webp": {
+      "inputHash": "ebdb278b46f5a211",
+      "file": "thumbnails/ui/side-neutral.webp.webp",
+      "width": 64,
+      "height": 64
+    },
+    "ui/side-vong.webp": {
+      "inputHash": "66381c9a733c1a6d",
+      "file": "thumbnails/ui/side-vong.webp.webp",
+      "width": 64,
+      "height": 64
+    },
+    "ui/stat-cost.webp": {
+      "inputHash": "de05ca27133a3cca",
+      "file": "thumbnails/ui/stat-cost.webp.webp",
+      "width": 128,
+      "height": 128
+    },
+    "ui/stat-health.webp": {
+      "inputHash": "fe9219abcd04e44e",
+      "file": "thumbnails/ui/stat-health.webp.webp",
+      "width": 128,
+      "height": 128
+    },
+    "ui/stat-power.webp": {
+      "inputHash": "c963a817ea3548c4",
+      "file": "thumbnails/ui/stat-power.webp.webp",
+      "width": 128,
+      "height": 128
+    },
+    "ui/stat-speed.webp": {
+      "inputHash": "036f437ab2c6ff54",
+      "file": "thumbnails/ui/stat-speed.webp.webp",
+      "width": 128,
+      "height": 128
     }
   }
 }

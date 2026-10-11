@@ -1,0 +1,28 @@
+{
+  "kind": "die",
+  "material": "stone",
+  "mass": 0.7,
+  "friction": 0.78,
+  "restitution": 0.38,
+  "originAuthored": true,
+  "metadata": {
+    "dieFaceLayout": "die-d6",
+    "dieSides": 6,
+    "dieFaces": []
+  },
+  "collider": {
+    "mode": "custom",
+    "entries": [
+      {
+        "id": "collider-1",
+        "name": "die-collider",
+        "shape": "box",
+        "size": {
+          "x": 0.05000000074505806,
+          "y": 0.05000000074505806,
+          "z": 0.05000000074505806
+        }
+      }
+    ]
+  }
+}
