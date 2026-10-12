@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -39,6 +39,7 @@
     "assets/textures/counter-trigger.webp",
     "assets/textures/play-mat.webp",
     "data/cardSchema.json",
+    "decks/game-decks.json",
     "media/cover-thumb.webp",
     "media/cover.webp",
     "media/screenshot-0.webp",
@@ -55,10 +56,13 @@
     "models/dice/die-7.meta.json",
     "models/quarter.glb",
     "models/quarter.meta.json",
+    "models/star-wars-tcg-board.glb",
+    "starwars-tcg-board (1).webp",
     "textures/dice-diffuse-light-67546e5f.png",
     "textures/quarter-basecolor-70870e5e.png",
     "textures/quarter-mr-c3f547f4.png",
     "textures/quarter-normal-8c5c028b.png",
+    "textures/starwars-tcg-board.webp",
     "ui/side-dark.webp",
     "ui/side-light.webp",
     "ui/side-neutral.webp",
@@ -657,6 +661,36 @@
       "attestation": {
         "termsVersion": "2026-09-07.1",
         "acceptedAt": "2026-10-10T05:08:08.853Z",
+        "signedName": "Matt Larson"
+      }
+    },
+    {
+      "id": "credit-ffd4c4fc-fbc1-4e1b-bf56-ecaa1903e859",
+      "paths": [
+        "models/star-wars-tcg-board.glb",
+        "originals/starwars-tcg-board.webp",
+        "textures/starwars-tcg-board.webp"
+      ],
+      "origin": "own-work",
+      "recordedAt": "2026-10-11T20:33:34.490Z",
+      "attestation": {
+        "termsVersion": "2026-09-07.1",
+        "acceptedAt": "2026-10-11T20:33:34.490Z",
+        "signedName": "Matt Larson"
+      }
+    },
+    {
+      "id": "credit-b1467e73-f032-4b3b-9c87-a29bb645063b",
+      "paths": [
+        "originals/starwars-tcg-board (1).webp",
+        "starwars-tcg-board (1).webp"
+      ],
+      "origin": "own-work",
+      "title": "New SWTCG Play Mat",
+      "recordedAt": "2026-10-11T21:08:06.618Z",
+      "attestation": {
+        "termsVersion": "2026-09-07.1",
+        "acceptedAt": "2026-10-11T21:08:06.618Z",
         "signedName": "Matt Larson"
       }
     }

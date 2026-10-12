@@ -32,9 +32,21 @@
       "width": 256,
       "height": 256
     },
+    "@materials/mat-953942c6-4fb1-48bf-8366-2967821b6a33": {
+      "inputHash": "04de420e964f0b41",
+      "file": "thumbnails/@materials/mat-953942c6-4fb1-48bf-8366-2967821b6a33.webp",
+      "width": 256,
+      "height": 256
+    },
     "@prefabs/play-mat": {
       "inputHash": "72604463d7ddec63",
       "file": "thumbnails/@prefabs/play-mat.webp",
+      "width": 256,
+      "height": 256
+    },
+    "@prefabs/star-wars-tcg-board": {
+      "inputHash": "01a619df37f09ed2",
+      "file": "thumbnails/@prefabs/star-wars-tcg-board.webp",
       "width": 256,
       "height": 256
     },
@@ -242,6 +254,12 @@
       "width": 256,
       "height": 256
     },
+    "models/star-wars-tcg-board.glb": {
+      "inputHash": "ee52a7bebf09c5b5",
+      "file": "thumbnails/models/star-wars-tcg-board.glb.webp",
+      "width": 256,
+      "height": 256
+    },
     "originals/die-d6.glb": {
       "inputHash": "f846b3ecd375ab55",
       "file": "thumbnails/originals/die-d6.glb.webp",
@@ -271,6 +289,18 @@
       "file": "thumbnails/originals/side-vong.png.webp",
       "width": 64,
       "height": 64
+    },
+    "originals/starwars-tcg-board (1).webp": {
+      "inputHash": "f21be109e07cce99",
+      "file": "thumbnails/originals/starwars-tcg-board (1).webp.webp",
+      "width": 256,
+      "height": 256
+    },
+    "originals/starwars-tcg-board.webp": {
+      "inputHash": "2eef7fcd3f0dbf43",
+      "file": "thumbnails/originals/starwars-tcg-board.webp.webp",
+      "width": 256,
+      "height": 256
     },
     "originals/stat-cost.png": {
       "inputHash": "3a6267972f3e9402",
@@ -524,6 +554,12 @@
       "width": 181,
       "height": 256
     },
+    "starwars-tcg-board (1).webp": {
+      "inputHash": "7be4e49f5d4099c5",
+      "file": "thumbnails/starwars-tcg-board (1).webp.webp",
+      "width": 256,
+      "height": 256
+    },
     "textures/dice-diffuse-light-67546e5f.png": {
       "inputHash": "db816217924419ad",
       "file": "thumbnails/textures/dice-diffuse-light-67546e5f.png.webp",
@@ -545,6 +581,12 @@
     "textures/quarter-normal-8c5c028b.png": {
       "inputHash": "5f153f20eac9cc7d",
       "file": "thumbnails/textures/quarter-normal-8c5c028b.png.webp",
+      "width": 256,
+      "height": 256
+    },
+    "textures/starwars-tcg-board.webp": {
+      "inputHash": "c189dc0bf435c6ba",
+      "file": "thumbnails/textures/starwars-tcg-board.webp.webp",
       "width": 256,
       "height": 256
     },
