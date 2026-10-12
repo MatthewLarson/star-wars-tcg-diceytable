@@ -6,7 +6,32 @@
 
 ---
 
-A Star Wars TCG from Wizards of the Coast, which is now kept alive by the [Independent Development Committee](https://swtcgidc.wordpress.com/)!
+Wizards of the Coast's **Star Wars Trading Card Game** (2002–2005), played the way the [Independent Development Committee](https://swtcgidc.wordpress.com/) keeps it alive today. Fight for control of the Space, Ground and Character arenas: build units with build points, deploy them, battle with real dice, and win by controlling two arenas at the end of a turn.
+
+## Two ways to play
+
+**Scripted (rules enforced).** The table plays the IDC rules for you:
+
+- Build steps, retreat steps and the Space, Ground and Character battles.
+- Pay-or-play (POP) windows, disrupts and the response stack.
+- Unique stacking, stack rearranging and contests, Locations, Equipment, Pilots and Subordinates.
+- Card abilities from the full card pool, written up from the 2021 IDC rulebook and the IDC errata and rulings. A few judgement calls are recorded as house rulings.
+
+Right-click a card to see what it can do now, or drag it onto an arena. When a rule asks you to choose, you pick from pictures of the cards, including your opening hand's mulligan. You roll your own dice from the dice dock.
+
+**Standard.** A free-form table with the same play mat, zones and Force/build counters. Play by the rules you agree on, with the deck database at hand.
+
+## Bring your deck
+
+In the lobby, pick a deck you built, a community deck, or one from the public deck database. A game is Light Side against Dark Side (or Yuuzhan Vong). Two decks of the same side can't sit at the same table; Neutral decks can face anyone.
+
+## Play against the computer, or ranked
+
+No opponent? Seat a bot: **Trooper** (easy) or **Commander** (easy, medium or hard), which looks ahead with the rules and never sees your hand or deck order. The Scripted variant can also be played **ranked**.
+
+## Credits
+
+Star Wars: Trading Card Game © Wizards of the Coast and Lucasfilm Ltd. Rules updates by the SWTCG IDC; the 2022 Complete Updated Rulebook is included in the game's rules.
 
 ---
 
