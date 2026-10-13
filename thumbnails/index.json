@@ -231,8 +231,26 @@
       "height": 256
     },
     "media/screenshot-0.webp": {
-      "inputHash": "501172ebd3dfa563",
+      "inputHash": "4f503b77a6b2772f",
       "file": "thumbnails/media/screenshot-0.webp.webp",
+      "width": 256,
+      "height": 144
+    },
+    "media/screenshot-1.webp": {
+      "inputHash": "282b0a04edb1114c",
+      "file": "thumbnails/media/screenshot-1.webp.webp",
+      "width": 256,
+      "height": 144
+    },
+    "media/screenshot-2.webp": {
+      "inputHash": "25b4f9aa07659214",
+      "file": "thumbnails/media/screenshot-2.webp.webp",
+      "width": 256,
+      "height": 144
+    },
+    "media/screenshot-3.webp": {
+      "inputHash": "8e16f5602b923998",
+      "file": "thumbnails/media/screenshot-3.webp.webp",
       "width": 256,
       "height": 144
     },

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "id": "star-wars-tcg",
   "name": "Star Wars: Trading Card Game (WOTC)",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "type": "game-pack",
   "entry": {
     "setup": "setup.json",
@@ -43,6 +43,9 @@
     "media/cover-thumb.webp",
     "media/cover.webp",
     "media/screenshot-0.webp",
+    "media/screenshot-1.webp",
+    "media/screenshot-2.webp",
+    "media/screenshot-3.webp",
     "models/dice/die-1.die.json",
     "models/dice/die-2.die.json",
     "models/dice/die-3.die.json",
@@ -106,9 +109,36 @@
       "crop": {
         "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 0.5625
-      }
+        "w": 0.9110469692993964,
+        "h": 1
+      },
+      "title": "Star Wars: Trading Card Game (Online)",
+      "alt": "Star Wars: Trading Card Game (Online)",
+      "kind": "gameplay"
+    },
+    {
+      "path": "media/screenshot-2.webp",
+      "crop": {
+        "x": 0.04676753782668501,
+        "y": 0,
+        "w": 0.9080903875424423,
+        "h": 1
+      },
+      "title": "Star Wars: Trading Card Game (Online Closeup)",
+      "alt": "Star Wars: Trading Card Game (Online Closeup)",
+      "kind": "gameplay"
+    },
+    {
+      "path": "media/screenshot-1.webp",
+      "crop": {
+        "x": 0.07204773115566754,
+        "y": 0.04760137372680329,
+        "w": 0.8623237234477777,
+        "h": 0.9523986262731967
+      },
+      "title": "Star Wars: Trading Card Game (Online - Scripted UI)",
+      "alt": "Star Wars: Trading Card Game (Online - Scripted UI)",
+      "kind": "gameplay"
     }
   ],
   "plugins": [
@@ -184,7 +214,6 @@
       "id": "credit-90d8907d-babe-405b-a9e7-0a75d693880d",
       "paths": [
         "tools/deck-gate-harness.mjs",
-        "media/screenshot-0.webp",
         "media/cover.webp",
         "media/cover-thumb.webp",
         "assets/cover.webp",
@@ -702,6 +731,36 @@
       "attestation": {
         "termsVersion": "2026-09-07.1",
         "acceptedAt": "2026-10-11T21:08:06.618Z",
+        "signedName": "Matt Larson"
+      }
+    },
+    {
+      "id": "credit-1affbd27-6fd2-46e9-9b88-45ced9e9b866",
+      "paths": [
+        "media/screenshot-1.webp",
+        "media/screenshot-2.webp",
+        "media/screenshot-3.webp"
+      ],
+      "origin": "own-work",
+      "title": "Star Wars: Trading Card Game Mod Screenshots",
+      "recordedAt": "2026-10-13T05:35:27.985Z",
+      "attestation": {
+        "termsVersion": "2026-09-07.1",
+        "acceptedAt": "2026-10-13T05:35:27.985Z",
+        "signedName": "Matt Larson"
+      }
+    },
+    {
+      "id": "credit-e405fd5c-767f-4a1c-b87b-5bc1d3ed079f",
+      "paths": [
+        "media/screenshot-0.webp"
+      ],
+      "origin": "own-work",
+      "title": "Star Wars TCG Table",
+      "recordedAt": "2026-10-13T06:12:23.765Z",
+      "attestation": {
+        "termsVersion": "2026-09-07.1",
+        "acceptedAt": "2026-10-13T06:12:23.765Z",
         "signedName": "Matt Larson"
       }
     }
